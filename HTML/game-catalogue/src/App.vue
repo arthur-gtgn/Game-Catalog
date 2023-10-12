@@ -1,85 +1,68 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+    <div class="container">
+        <TutoHeader title="Task Tracker" />
+        <TutoTasks :tasks="tasks"></TutoTasks>
     </div>
-  </header>
-
-  <RouterView />
 </template>
 
+<script>
+import TutoHeader from './components/TutoHeader.vue'
+import TutoTasks from './components/TutoTasks.vue'
+
+export default {
+    name: 'App',
+    components: {
+        TutoHeader,
+        TutoTasks
+    },
+    data() {
+        return {
+            tasks: []
+        }
+    },
+    created() {
+        this.tasks = [
+            {
+                id: 1,
+                text: 'Java Programming',
+                day: 'October 1st at 9:00am',
+                reminder: true
+            },
+            {
+                id: 2,
+                text: 'Networks',
+                day: 'October 2nd at 9:00am',
+                reminder: false
+            },
+            {
+                id: 3,
+                text: 'Advanced Web Programming',
+                day: 'October 3rd at 9:00am',
+                reminder: false
+            },
+            {
+                id: 4,
+                text: 'Operating Systems',
+                day: 'October 4th at 2:00pm',
+                reminder: true
+            },
+            {
+                id: 5,
+                text: 'Computer Architecture',
+                day: 'October 5th at 2:00pm',
+                reminder: false
+            }
+        ]
+    }
+}
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.container {
+    align-items: center;
+    justify-content: space-between;
+    border: solid 3px black;
+    border-radius: 8px;
+    padding: 50px;
 }
 </style>
