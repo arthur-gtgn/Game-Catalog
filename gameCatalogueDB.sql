@@ -126,3 +126,43 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+INSERT INTO Company (company_name, ceo, nb_employees, market_value, reseller)
+VALUES
+    ('Electronic Arts', 'Andrew Wilson', 9000, 12.45, TRUE),
+    ('Nintendo', 'Shuntaro Furukawa', 6000, 85.20, FALSE),
+    ('Activision Blizzard', 'Bobby Kotick', 8000, 45.70, TRUE),
+    ('Sony Interactive Entertainment', 'Jim Ryan', 14000, 102.89, FALSE),
+    ('Ubisoft', 'Yves Guillemot', 16000, 19.75, TRUE);
+
+INSERT INTO Game (game_name, category, release_date, age_rating)
+VALUES
+    ('FIFA 23', 'Sports', '2023-09-15', 3),
+    ('The Legend of Zelda: Breath of the Wild 2', 'Adventure', '2023-11-20', 10),
+    ('Call of Duty: Warzone', 'Shooter', '2023-05-10', 18),
+    ('Horizon Forbidden West', 'Action', '2023-02-18', 16),
+    ('Assassins Creed: Valhalla', 'Role-Playing', '2022-11-10', 17);
+
+INSERT INTO developed_by (game_name, company_name)
+VALUES
+    ('FIFA 23', 'Electronic Arts'),
+    ('The Legend of Zelda: Breath of the Wild 2', 'Nintendo'),
+    ('Call of Duty: Warzone', 'Activision Blizzard'),
+    ('Horizon Forbidden West', 'Sony Interactive Entertainment'),
+    ('Assassins Creed: Valhalla', 'Ubisoft');
+
+INSERT INTO sold_at (game_name, company_name, price)
+VALUES
+    ('FIFA 23', 'Electronic Arts', 59.99),
+    ('The Legend of Zelda: Breath of the Wild 2', 'Nintendo', 69.99),
+    ('Call of Duty: Warzone', 'Activision Blizzard', 0.00),
+    ('Horizon Forbidden West', 'Sony Interactive Entertainment', 69.99),
+    ('Assassin''s Creed: Valhalla', 'Ubisoft', 49.99);
+
+INSERT INTO Platform (platform_name, price, release_date, current_gen, company)
+VALUES
+    ('PlayStation 5', 499, '2020-11-12', TRUE, 'Sony Interactive Entertainment'),
+    ('Xbox Series X', 499, '2020-11-10', TRUE, 'Microsoft'),
+    ('Nintendo Switch', 299, '2017-03-03', TRUE, 'Nintendo'),
+    ('PC', 0, 'N/A', TRUE, 'Various'),
+    ('PlayStation 4', 299, '2013-11-15', FALSE, 'Sony Interactive Entertainment');
