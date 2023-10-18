@@ -1,7 +1,7 @@
 <template>
     <header>
-    <h1>GAME CATALOGUE</h1>
-</header>
+      <h1>GAME CATALOGUE</h1>
+    </header>
 </template>
 <script>
 export default{
