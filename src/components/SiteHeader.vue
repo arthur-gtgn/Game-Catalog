@@ -21,10 +21,13 @@ export default {
 <style scoped>
 header {
   font-family: "Baloo Bhaina 2", serif;
-  color: white;
+  color: #F4F1DE;
   display: flex;
   align-content: center;
-  padding: 2.5vw;
+  padding-top: 10px;
+  padding-left: 50px;
+  padding-bottom: 10px;
+
 }
 
 header .logo {
@@ -34,4 +37,5 @@ header .logo {
 header .title {
   margin-left: 20px;
 }
+
 </Style>

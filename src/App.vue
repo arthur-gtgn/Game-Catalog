@@ -1,9 +1,9 @@
 <template>
-  <SiteHeader title="GAME CATALOGUE"/>
+  <SiteTopBar/>
 </template>
 
 <script setup>
-import SiteHeader from './components/SiteHeader.vue';
+import SiteTopBar from "@/components/SiteTopBar.vue";
 import GameCard from "./components/SiteGameCard.vue";
 </script>
 
