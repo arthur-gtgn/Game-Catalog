@@ -1,12 +1,22 @@
 <template>
-  <div>
-    <SiteHeader />
-    <GameCard title="Game1" category="action" age-rating=18 release-date="12/02/2014"/>
-  </div>
+  <SiteHeader title="GAME CATALOGUE"/>
 </template>
+
 <script setup>
-import SiteHeader from './components/SiteHeader.vue'
-import GameCard from "@/components/SiteGameCard.vue";
+import SiteHeader from './components/SiteHeader.vue';
+import GameCard from "./components/SiteGameCard.vue";
 </script>
 
-<style scoped></style>
+<script>
+export default {
+  name: 'App'
+}
+</script>
+
+<style>
+:root {
+  backdrop-filter: blur(10px);
+  background-image: url("assets/background.jpg");
+  background-size: 100vw 100vh;
+}
+</style>

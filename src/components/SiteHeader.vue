@@ -1,22 +1,37 @@
 <template>
-    <header>
-      <h1>GAME CATALOGUE</h1>
-    </header>
+  <header>
+    <SiteIcon class="logo"/>
+    <h1 class="title">{{ title }}</h1>
+  </header>
 </template>
+
+<script setup>
+import SiteIcon from "@/components/icons/SiteIcon.vue";
+</script>
+
 <script>
-export default{
-    name :'SiteHeader',
+export default {
+  name: 'SiteHeader',
+  props: {
+    title: String
+  }
 }
 </script>
+
 <style scoped>
-    header {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        text-align: center;
-        color: rgb(212, 124, 24);
-        letter-spacing: 3px;
-        font-size: clamp(1.5em, 3.75vw, 4em);
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        text-shadow: 3px 2px #00000069;
-    }
-    </Style>
+header {
+  font-family: "Baloo Bhaina 2", serif;
+  color: white;
+  display: flex;
+  align-content: center;
+  padding: 2.5vw;
+}
+
+header .logo {
+  margin-right: 20px;
+}
+
+header .title {
+  margin-left: 20px;
+}
+</Style>
