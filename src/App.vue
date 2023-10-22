@@ -2,14 +2,14 @@
   <SiteTopBar/>
 </template>
 
-<script setup>
-import SiteTopBar from "@/components/SiteTopBar.vue";
-import GameCard from "./components/SiteGameCard.vue";
-</script>
-
 <script>
+import SiteTopBar from "@/components/SiteTopBar.vue";
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    SiteTopBar
+  }
 }
 </script>
 

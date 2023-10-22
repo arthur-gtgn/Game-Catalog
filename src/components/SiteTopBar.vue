@@ -1,11 +1,13 @@
-<script setup>
+<script>
 import SiteHeader from "@/components/SiteHeader.vue";
 import SiteNavBar from "@/components/SiteNavBar.vue";
-</script>
 
-<script>
 export default {
-  name: "SiteTopBar"
+  name: "SiteTopBar",
+  components: {
+    SiteHeader,
+    SiteNavBar,
+  }
 }
 </script>
 
@@ -24,15 +26,24 @@ export default {
   justify-content: space-between;
 }
 
-
 .top-bar:after {
   content: "";
   background: #F4F1DE;
   position: absolute;
-  top: 8vw;
+  top: 125px;
   bottom: 0;
   left: 0;
   height: 3px;
-  width: 20%;
+  width: 0;
+  animation: expands 1s forwards;
+}
+
+@keyframes expands {
+  from {
+    width: 0;
+  }
+  to {
+    width: 300px;
+  }
 }
 </style>

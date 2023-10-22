@@ -1,6 +1,7 @@
 <template>
   <header>
     <SiteIcon class="logo"/>
+    <img src="src/assets/troll.jpeg" alt="troll-image" class="logo-hover">
     <h1 class="title">{{ title }}</h1>
   </header>
 </template>
@@ -36,6 +37,34 @@ header .logo {
 
 header .title {
   margin-left: 20px;
+}
+
+header .logo-hover {
+  display: none;
+  transition: transform 0.3s ease;
+}
+
+header:hover .logo {
+  display: none;
+}
+
+header:hover .logo-hover {
+  border-radius: 100px;
+  display: inline;
+  margin-right: 20px;
+  height: 80px;
+  width: 80px;
+  animation: rotateAnimation 2s infinite linear;
+}
+
+@keyframes rotateAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+
 }
 
 </Style>
