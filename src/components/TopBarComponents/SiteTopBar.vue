@@ -1,20 +1,20 @@
 <script>
-import SiteHeader from "@/components/SiteHeader.vue";
-import SiteNavBar from "@/components/SiteNavBar.vue";
+import SiteHeader from "@/components/TopBarComponents/SiteHeader.vue";
+import SiteNavBar from "@/components/TopBarComponents/SiteNavBar.vue";
 
 export default {
   name: "SiteTopBar",
   components: {
     SiteHeader,
     SiteNavBar,
-  }
-}
+  },
+};
 </script>
 
 <template>
   <div class="top-bar">
-    <SiteHeader class="header" title="GAME CATALOGUE"/>
-    <SiteNavBar/>
+    <SiteHeader class="header" title="GAME CATALOGUE" />
+    <SiteNavBar />
   </div>
 </template>
 
@@ -28,7 +28,7 @@ export default {
 
 .top-bar:after {
   content: "";
-  background: #F4F1DE;
+  background: #f4f1de;
   position: absolute;
   top: 125px;
   bottom: 0;

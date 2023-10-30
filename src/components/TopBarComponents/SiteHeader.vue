@@ -1,7 +1,7 @@
 <template>
   <header>
-    <SiteIcon class="logo"/>
-    <img src="src/assets/troll.jpeg" alt="troll-image" class="logo-hover">
+    <SiteIcon class="logo" />
+    <!-- <img src="src/assets/troll.jpeg" alt="troll-image" class="logo-hover" /> -->
     <h1 class="title">{{ title }}</h1>
   </header>
 </template>
@@ -12,23 +12,22 @@ import SiteIcon from "@/components/icons/SiteIcon.vue";
 
 <script>
 export default {
-  name: 'SiteHeader',
+  name: "SiteHeader",
   props: {
-    title: String
-  }
-}
+    title: String,
+  },
+};
 </script>
 
 <style scoped>
 header {
   font-family: "Baloo Bhaina 2", serif;
-  color: #F4F1DE;
+  color: #f4f1de;
   display: flex;
   align-content: center;
   padding-top: 10px;
   padding-left: 50px;
   padding-bottom: 10px;
-
 }
 
 header .logo {
@@ -39,6 +38,7 @@ header .title {
   margin-left: 20px;
 }
 
+/*
 header .logo-hover {
   display: none;
   transition: transform 0.3s ease;
@@ -47,8 +47,9 @@ header .logo-hover {
 header:hover .logo {
   display: none;
 }
+*/
 
-header:hover .logo-hover {
+header:hover {
   border-radius: 100px;
   display: inline;
   margin-right: 20px;
@@ -64,7 +65,5 @@ header:hover .logo-hover {
   to {
     transform: rotate(360deg);
   }
-
 }
-
-</Style>
+</style>

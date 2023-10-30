@@ -1,16 +1,14 @@
 <template>
-  <SiteTopBar/>
+  <router-view></router-view>
 </template>
 
 <script>
-import SiteTopBar from "@/components/SiteTopBar.vue";
+import SiteTopBar from "@/components/TopBarComponents/SiteTopBar.vue";
 
 export default {
-  name: 'App',
-  components: {
-    SiteTopBar
-  }
-}
+  name: "App",
+  components: { SiteTopBar },
+};
 </script>
 
 <style>
