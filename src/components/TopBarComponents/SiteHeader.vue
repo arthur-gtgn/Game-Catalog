@@ -49,6 +49,7 @@ header:hover .logo {
 }
 */
 
+/*
 header:hover {
   border-radius: 100px;
   display: inline;
@@ -66,4 +67,5 @@ header:hover {
     transform: rotate(360deg);
   }
 }
+*/
 </style>

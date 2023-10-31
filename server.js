@@ -14,12 +14,15 @@ conn.then(function (conn) {
   });
 })
 
-
+const path = require("path");
+const serverStatic  = require("serve-static");
 const dotenv = require("dotenv");
 dotenv.config();
 
 const express = require("express");
 const app = express()
+
+app.use(serverStatic(__dirname + "/dist"));
 
 app.listen(process.env.WEB_PORT, "0.0.0.0", function () {
   console.log("Listenning on " + process.env.WEB_PORT);
