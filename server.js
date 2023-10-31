@@ -1,28 +1,36 @@
+const mysql = require("mysql2/promise");
+const conn = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  database: "gameTelescope",
+  password: "administrator",
+  debug: false,
+})
+
+conn.then(function (conn) {
+  conn.execute("SELECT * FROM Game").then(function (result) {
+    const [rows, fields] = result;
+    console.log(rows);
+  });
+})
+
+
+const dotenv = require("dotenv");
+dotenv.config();
+
 const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
+const app = express()
 
-const app = express();
+app.listen(process.env.WEB_PORT, "0.0.0.0", function () {
+  console.log("Listenning on " + process.env.WEB_PORT);
+})
 
-let corsOptions = {
-  origin: "http://localhost:8080",
-};
-
-app.use(cors(corsOptions));
-
-// parse requests of content-type - application/json
-app.use(bodyParser.json());
-
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to game catalogue." });
+app.get("/", (request, response) => {
+  let clientIp = request.ip;
+  response.send(`Hello, ${clientIp}. The nodejs server has started.`);
+  response.end();
 });
 
-// set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
+
+
+
