@@ -1,9 +1,12 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 const mysql = require("mysql2/promise");
 const conn = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "gameTelescope",
-  password: "administrator",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASS,
   debug: false,
 })
 
@@ -16,8 +19,6 @@ conn.then(function (conn) {
 
 const path = require("path");
 const serverStatic  = require("serve-static");
-const dotenv = require("dotenv");
-dotenv.config();
 
 const express = require("express");
 const app = express()
