@@ -1,0 +1,11 @@
+gamecatalogue.com/home
+gamecatalogue.com/about
+gamecatalogue.com/teams
+gamecatalogue.com/games
+gamecatalogue.com/games/[game-id]
+gamecatalogue.com/auth
+gamecatalogue.com/admin
+gamecatalogue.com/add-game
+gamecatalogue.com/edit-game/[game-id]
+gamecatalogue.com/delete-game/[game-id]
+gamecatalogue.com/logout
