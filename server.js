@@ -29,8 +29,4 @@ app.listen(process.env.WEB_PORT, "0.0.0.0", function () {
     console.log("Listenning on " + process.env.WEB_PORT);
 });
 
-app.get("/", (request, response) => {
-    let clientIp = request.ip;
-    response.send(`Hello, ${clientIp}. The nodejs server has started.`);
-    response.end();
-});
+app.use("/games", require("./routes/gamesRoute"));
