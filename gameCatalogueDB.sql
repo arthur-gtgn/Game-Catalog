@@ -10,6 +10,17 @@ DROP TABLE IF EXISTS Game;
 DROP TABLE IF EXISTS Platform;
 DROP TABLE IF EXISTS Review;
 DROP TABLE IF EXISTS Reviewer;
+DROP TABLE IF EXISTS Users;
+
+CREATE TABLE Users(
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_created DATETIME,
+    username VARCHAR(50) UNIQUE,
+    email VARCHAR(50) UNIQUE,
+    role VARCHAR(50),
+    password VARCHAR(100)
+);
+
 CREATE TABLE Company (
     company_id INT,
     company_name VARCHAR(50),
@@ -181,3 +192,5 @@ VALUES
     (4, 5),
     (5, 4);
 
+INSERT INTO Users VALUES (NULL, now(), 'Arthur', 'arthur.gatignol@efrei.net', 'ADMIN', SHA2(CONCAT(NOW(), 'administrator'), 224));
+INSERT INTO Users VALUES (NULL, now(), 'Romain', 'romain.samson@efrei.net', 'ADMIN', SHA2(CONCAT(NOW(), 'administrator2'), 224));
