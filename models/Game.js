@@ -10,7 +10,14 @@ class Game {
     }
 
     save() {
-        let sql = `INSERT INTO Game VALUES(${this.game_id},"${this.game_name}","${this.category}","${this.release_date}",${this.age_rating});`;
+        let sql = `
+        INSERT INTO Game 
+        VALUES(
+            ${this.game_id},
+            "${this.game_name}",
+            "${this.category}",
+            "${this.release_date}",
+            ${this.age_rating});`;
         return db.execute(sql);
     }
 
@@ -22,6 +29,11 @@ class Game {
     static findByID(game_id) {
         let sql = `SELECT * FROM Game WHERE game_id = ${game_id}`;
 
+        return db.execute(sql);
+    }
+
+    update(n_game_name, n_category, n_release_date, n_age_rating, game_id) {
+        let sql = `ALTER TABLE Game UPDATE game_name = "${n_game_name}", category = "${n_category}", release_date = "${n_release_date}", age_rating = ${n_age_rating} WHERE game_id = ${game_id};`;
         return db.execute(sql);
     }
 }
