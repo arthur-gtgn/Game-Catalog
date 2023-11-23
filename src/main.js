@@ -9,6 +9,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import App from "./App.vue";
 import ExplainComponent from "@/components/ExplainComponent.vue";
+import login from "@/components/login.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -16,6 +17,7 @@ const router = createRouter({
     { path: "/", component: HomeComponent },
     { path: "/about", component: AboutComponent },
     { path: "/explain", component: ExplainComponent },
+    { path: "/login", component: login },
   ],
 });
 

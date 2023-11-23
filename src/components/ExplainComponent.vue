@@ -10,6 +10,7 @@ the games based on their characteristics such as price, category, rating, and mo
 </div>
 </template>
 
+
 <script>
 import SiteTopBar from "@/components/TopBarComponents/SiteTopBar.vue";
 

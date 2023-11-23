@@ -21,6 +21,12 @@
         </button>
       </h2>
     </li>
+
+    <li>
+      <h2>
+        <button @click="loginInput" class="button-52" role="button">LOGIN</button>
+      </h2>
+    </li>
   </ul>
 </template>
 
@@ -36,6 +42,9 @@ export default {
     },
     homeInput() {
       this.$router.push("/");
+    },
+    loginInput() {
+      this.$router.push("/login");
     },
   },
 };
