@@ -1,41 +1,42 @@
 <template>
-  <header>
-    <SiteIcon class="logo" />
-    <!-- <img src="src/assets/troll.jpeg" alt="troll-image" class="logo-hover" /> -->
-    <h1 class="title">{{ title }}</h1>
-  </header>
+    <header>
+        <v-icon
+            name="la-codepen"
+            scale="4"
+            fill="#EF67D8"
+            animation="pulse"
+            speed="slow"
+        />
+        <!-- <img src="src/assets/troll.jpeg" alt="troll-image" class="logo-hover" /> -->
+        <h2 class="title">{{ title }}</h2>
+    </header>
 </template>
 
-<script setup>
-import SiteIcon from "@/components/icons/SiteIcon.vue";
-</script>
+<script setup></script>
 
 <script>
 export default {
-  name: "SiteHeader",
-  props: {
-    title: String,
-  },
+    name: "SiteHeader",
+    props: {
+        title: String,
+    },
 };
 </script>
 
 <style scoped>
 header {
-  font-family: "Baloo Bhaina 2", serif;
-  color: #f4f1de;
-  display: flex;
-  align-content: center;
-  padding-top: 10px;
-  padding-left: 50px;
-  padding-bottom: 10px;
-}
-
-header .logo {
-  margin-right: 20px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
 }
 
 header .title {
-  margin-left: 20px;
+    font-size: var(--h2);
+    color: var(--text);
+    font-family: "Poppins", sans-serif;
+    line-height: 1.3;
+    letter-spacing: 0;
+    margin-left: 15px;
 }
 
 /*

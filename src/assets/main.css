@@ -1,1 +1,42 @@
+:root {
+    --text: #fdedfa;
+    --background: #050004;
+    --primary: #ef67d8;
+    --secondary: #33052b;
+    --accent: #e71dc6;
+    --font-scale: 1.333;
+    --p: 1rem;
+    --h5: calc(var(--p) * var(--font-scale));
+    --h4: calc(var(--h5) * var(--font-scale));
+    --h3: calc(var(--h4) * var(--font-scale));
+    --h2: calc(var(--h3) * var(--font-scale));
+    --h1: calc(var(--h2) * var(--font-scale));
+    font-family: "Poppins-Regular", sans-serif;
+}
 
+@font-face {
+    font-family: "exo";
+    src: url("/src/assets/fonts/Exo-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("src/assets/fonts/Poppins-Black.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-BlackItalic.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-Bold.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-BoldItalic.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-ExtraBold.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-ExtraBoldItalic.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-ExtraLight.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-ExtraLightItalic.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-Italic.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-Light.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-LightItalic.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-Medium.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-MediumItalic.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-Regular.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-SemiBold.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-SemiBoldItalic.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-Thin.ttf") format("truetype"),
+        url("src/assets/fonts/Poppins-ThinItalic.ttf") format("truetype");
+}
