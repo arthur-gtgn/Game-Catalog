@@ -1,5 +1,4 @@
 import "./assets/main.css";
-import "./assets/sass/style.scss";
 
 import HomeComponent from "@/components/HomeComponent.vue";
 import AboutComponent from "@/components/AboutComponent.vue";

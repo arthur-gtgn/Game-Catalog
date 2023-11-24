@@ -1,6 +1,12 @@
 <template>
     <header>
-        <v-icon name="la-codepen" scale="4" fill="#EF67D8" animation="pulse" />
+        <v-icon
+            name="la-codepen"
+            scale="4"
+            fill="#EF67D8"
+            animation="pulse"
+            speed="slow"
+        />
         <!-- <img src="src/assets/troll.jpeg" alt="troll-image" class="logo-hover" /> -->
         <h2 class="title">{{ title }}</h2>
     </header>
