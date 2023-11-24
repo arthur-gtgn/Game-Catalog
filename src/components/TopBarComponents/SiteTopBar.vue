@@ -13,7 +13,7 @@ export default {
 
 <template>
   <div class="top-bar">
-    <SiteHeader class="header" title="GAME CATALOGUE" />
+    <SiteHeader class="header" title="GAME CATALOG" />
     <SiteNavBar />
   </div>
 </template>
