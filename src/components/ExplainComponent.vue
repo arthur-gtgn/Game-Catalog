@@ -6,6 +6,9 @@
             Game Catalog is a website designed for video game enthusiasts
             looking to discover new games based on their preferences.
         </p>
+        <div class="image-container">
+      <img src="src/assets/persoJeux.jpg" alt="Image Description" />
+    </div>
         <p>
             The primary goal of this project is to create an interactive and
             user-friendly website that displays a list of video games, allowing
@@ -33,7 +36,7 @@ h1 {
     color: var(--text);
     max-width: 580px;
     margin: 20px auto;
-    padding: 20px;
+    
     align-content: center;
     text-align: center;
 }
@@ -42,5 +45,17 @@ p {
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
     text-align: center;
+    padding: 40px 200px;
 }
+.image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; 
+  }
+
+  .image-container img {
+    max-width: 80%;
+    height: auto;
+    border-radius: 20px;
+  }
 </style>
