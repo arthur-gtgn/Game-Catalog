@@ -30,10 +30,11 @@
           <input type="password" id="password" v-model="userData.password" required />
           <i class="uil uil-lock password"></i>
         </div>
-        <button type="submit">{{ mode === 'login' ? 'Login' : 'Register' }}</button>
+        <button class= "button" type="submit">{{ mode === 'login' ? 'Login' : 'Register' }}</button>
       </form>
 
       <p>
+        
         {{ mode === 'login' ? "Don't have an account? " : 'Already have an account? ' }}
         <a href="#" @click="toggleMode">{{ mode === 'login' ? 'Register' : 'Login' }}</a>
       </p>
@@ -78,9 +79,38 @@
   <style scoped>
   .form_cont{
     position:absolute;
-    top: 40%;
+    padding : 20px;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: aliceblue;
+    border-radius: 20px;
+    
   }
+  .box{
+    display: flex; 
+    flex-direction: column;
+    
+    margin: 9%;
+    
+  }
+  h2{
+    text-align: center;
+  }
+.box input{
+  border :none;
+  outline:none;
+  border-bottom: 1px solid rgb(153, 149, 149);
+  box-sizing: border-box;
+    margin-top: 5px;
+    width: 100%;
+}
+.form_cont .button{
+  background-color: blueviolet;
+  margin-top: 10px;
+  padding:10px;
+  width: 100%;
+  border-radius: 10px;
+  color:aliceblue;
+}
 </style>

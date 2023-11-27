@@ -16,7 +16,7 @@
     <MemberCard
       first-name="Romain"
       last-name="Samson"
-      img-ref="src/assets/troll.jpeg"
+      img-ref="src/assets/RS.jpg"
       img-alt="romain-pp"
       git-link="github.com/arthur-gtgn"
       topic1="cybersecurity"
