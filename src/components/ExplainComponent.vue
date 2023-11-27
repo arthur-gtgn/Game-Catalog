@@ -6,7 +6,7 @@
             Game Catalog is a website designed for video game enthusiasts
             looking to discover new games based on their preferences.
         </p>
-        <div class="image-container">
+        <div class="image-container" ref = cardTilt>
       <img src="src/assets/persoJeux.jpg" alt="Image Description" />
     </div>
         <p>
@@ -20,13 +20,17 @@
 
 <script>
 import SiteTopBar from "@/components/TopBarComponents/SiteTopBar.vue";
+import VanillaTilt from "vanilla-tilt";
 
 export default {
     name: "ExplainComponent",
     components: {
         SiteTopBar,
     },
-};
+    mounted() {
+        VanillaTilt.init(this.$refs.cardTilt, this.options);
+    }
+    };
 </script>
 
 <style scoped>
@@ -45,17 +49,19 @@ p {
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
     text-align: center;
-    padding: 40px 200px;
+    padding: 40px 125px;
 }
 .image-container {
     display: flex;
     justify-content: center;
     margin-top: 20px; 
+    
   }
 
   .image-container img {
-    max-width: 80%;
+    max-width: 60%;
     height: auto;
     border-radius: 20px;
   }
+  
 </style>
