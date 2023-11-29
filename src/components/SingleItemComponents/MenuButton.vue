@@ -25,9 +25,9 @@ export default {
 
 <style scoped>
 .button-52 {
-    font-family: "Baloo Bhaina 2", serif;
+    font-size: "Poppins", sans-serif;
     font-size: 16px;
-    font-weight: 200;
+    font-weight: bold;
     letter-spacing: 1px;
     padding: 13px 20px 13px;
     outline: 0;

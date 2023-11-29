@@ -12,10 +12,10 @@ export default {
 </script>
 
 <template>
-  <div class="top-bar">
-    <SiteHeader class="header" title="GAME CATALOG" />
-    <SiteNavBar />
-  </div>
+    <div class="top-bar">
+        <SiteHeader class="header" title="GAME CATALOG" />
+        <SiteNavBar />
+    </div>
 </template>
 
 <style scoped>
@@ -30,7 +30,7 @@ export default {
     content: "";
     background: #f4f1de;
     position: absolute;
-    top: 125px;
+    top: 150px;
     bottom: 0;
     left: 0;
     height: 3px;
