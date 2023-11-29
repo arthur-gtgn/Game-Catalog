@@ -9,7 +9,7 @@ exports.getAllGames = async (req, res, next) => {
         next(err);
     }
 };
-
+ 
 exports.createGame = async (req, res, next) => {
     try {
         let { game_id, game_name, category, release_date, age_rating } =

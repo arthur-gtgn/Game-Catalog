@@ -1,12 +1,13 @@
 const dotenv = require("dotenv");
 const serverStatic = require("serve-static");
 const express = require("express");
+const cors = require('cors');
 
 dotenv.config();
 const app = express();
 app.use(serverStatic(__dirname + "/dist"));
 app.use(express.json());
-
+app.use(cors());
 const mysql = require("mysql2/promise");
 const conn = mysql.createConnection({
     host: process.env.DB_HOST,
