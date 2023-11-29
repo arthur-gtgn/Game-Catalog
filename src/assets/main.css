@@ -1,9 +1,34 @@
 :root {
+    /*
     --text: #fdedfa;
     --background: #050004;
     --primary: #ef67d8;
     --secondary: #33052b;
     --accent: #e71dc6;
+    */
+
+    /*
+    --text: #f7f7f8;
+    --background: #000000;
+    --primary: #c0c1bd;
+    --secondary: #232325;
+    --accent: #8b8d86;
+    */
+
+    /*
+    --text: #cdfed0;
+    --background: #000500;
+    --primary: #f90bed;
+    --secondary: #024105;
+    --accent: #f915ee;
+    */
+
+    --text: #f6fefb;
+    --background: #000000;
+    --primary: #1ec286;
+    --secondary: #0a3e2b;
+    --accent: #34dfa1;
+
     --font-scale: 1.333;
     --p: 1rem;
     --h5: calc(var(--p) * var(--font-scale));

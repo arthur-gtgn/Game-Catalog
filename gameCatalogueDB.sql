@@ -33,10 +33,11 @@ CREATE TABLE Company (
 
 CREATE TABLE Game(
     game_id INT,
-    game_name VARCHAR(50),
+    game_name VARCHAR(100),
     category VARCHAR(50),
     release_date DATE,
     age_rating SMALLINT,
+    description VARCHAR(500),
     -- reseller VARCHAR(50) NOT NULL,
     -- developer VARCHAR(50) NOT NULL,
     PRIMARY KEY(game_id)
@@ -136,13 +137,18 @@ VALUES
     (4, 'Sony Interactive Entertainment', 'Jim Ryan', 14000, 102.89, FALSE),
     (5, 'Ubisoft', 'Yves Guillemot', 16000, 19.75, TRUE);
 
-INSERT INTO Game (game_id, game_name, category, release_date, age_rating)
-VALUES
-    (1, 'FIFA 23', 'Sports', '2023-09-15', 3),
-    (2, 'The Legend of Zelda: Breath of the Wild 2', 'Adventure', '2023-11-20', 10),
-    (3, 'Call of Duty: Warzone', 'Shooter', '2023-05-10', 18),
-    (4, 'Horizon Forbidden West', 'Action', '2023-02-18', 16),
-    (5, 'Assassins Creed: Valhalla', 'Role-Playing', '2022-11-10', 17);
+INSERT INTO Game (game_id, game_name, category, release_date, age_rating, description)
+VALUES (1, 'FIFA 23', 'Sports', '2023-09-15', 3,
+        'The latest in the FIFA series, offering enhanced football simulation with improved graphics and gameplay mechanics for a more immersive experience.'),
+       (2, 'The Legend of Zelda: Tears of the Kingdom', 'Adventure', '2023-11-20', 10,
+        'Breath of the Wild 2" (Adventure, 2023-11-20, Age 10+): A sequel to the acclaimed open-world adventure game, expanding the story and world of Hyrule with new puzzles and challenges.'),
+       (3, 'Call of Duty: Warzone', 'Shooter', '2023-05-10', 18,
+        'A high-octane shooter game set in a dynamic warzone, featuring intense, fast-paced combat and strategic gameplay elements.'),
+       (4, 'Horizon Forbidden West', 'Action', '2023-02-18', 16,
+        'An action-packed game set in a beautifully detailed post-apocalyptic world, combining exploration, combat, and a compelling narrative.'),
+       (5, 'Assassins Creed: Valhalla', 'Role-Playing', '2022-11-10', 17,
+        'A historical role-playing game where players explore the Viking era, engaging in epic battles and strategic gameplay while unraveling a deep storyline.');
+
 
 INSERT INTO Platform (platform_id, platform_name, price, release_date, current_gen, company)
 VALUES

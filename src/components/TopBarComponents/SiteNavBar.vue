@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import MenuButton from "../SingleItemComponents/MenuButton.vue";
+import MenuButton from "@/components/SingleItemComponents/MenuButton.vue";
 
 export default {
     name: "TestNavBar",

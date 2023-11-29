@@ -3,7 +3,7 @@
         <v-icon
             name="la-codepen"
             scale="4"
-            fill="#EF67D8"
+            fill="#34dfa1"
             animation="pulse"
             speed="slow"
         />

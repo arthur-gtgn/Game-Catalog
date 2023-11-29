@@ -2,16 +2,15 @@ import "./assets/main.css";
 
 import HomeComponent from "@/components/HomeComponent.vue";
 import AboutComponent from "@/components/AboutComponent.vue";
+import App from "./App.vue";
+import ExplainComponent from "@/components/ExplainComponent.vue";
+import login from "@/components/login.vue";
 
 import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 import { OhVueIcon, addIcons } from "oh-vue-icons";
 import { LaCodepen } from "oh-vue-icons/icons";
-
-import App from "./App.vue";
-import ExplainComponent from "@/components/ExplainComponent.vue";
-import login from "@/components/login.vue";
 
 addIcons(LaCodepen);
 
