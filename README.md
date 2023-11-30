@@ -1,29 +1,31 @@
-# game-catalogue
+# Game Catalog
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+**Game Catalog** is the project that me (@arthur-gtgn) and Romain (@romain-sam) have built throughout our 5th semester at EFREI Paris. The goal of the project was to build a full-stack application using Vue, MySQL and NodeJS. Documentation about the database is attached. Below you will find the instructions to run the project.
 
 ## Project Setup
+
+You should have `npm` and `node` installed in your machine. A MySQL server should also have been set up prior to running the project. In order to have the database used for the project, you should execute the SQL script found in the project files. You should also make sure to create a `.env` file and add your database informations in order to run the project.
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Compile and Hot-Reload for Vue
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Compile the Vue files (optional)
 
 ```sh
 npm run build
 ```
+
+### Run the API of the database
+
+```sh
+node server.js
+```
+
+
