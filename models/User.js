@@ -10,8 +10,13 @@ class User {
         this.password = password;
     }
 
-    static getUser(username, password) {
-        let sql = `SELECT * FROM Users WHERE username = "${username}" AND password = "${password}";`;
+    static getUser(email, password) {
+        let sql = `SELECT username FROM Users WHERE email = ? AND password = SHA2(CONCAT((SELECT user_created FROM Users WHERE email = ?), ?), 224);`;
+        return db.execute(sql, [email, email, password]);
+    }
+
+    static getUsers() {
+        let sql = `SELECT * FROM Users;`;
         return db.execute(sql);
     }
 }

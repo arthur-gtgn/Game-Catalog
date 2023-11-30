@@ -4,15 +4,28 @@ const bcrypt = require("bcrypt");
 
 exports.login = async (req, res, next) => {
     try {
-        let { username, password } = req.body;
+        let { email, password } = req.body;
 
-        let [user, _] = await User.getUser(username);
+        const [user, _] = await User.getUser(email, password);
 
-        if (user.password == password) {
-            res.status(200).json({ message: "Login successful" });
+        if (user.length === 0) {
+            res.status(401).json({
+                message: "Your email or password is incorrect",
+            });
         } else {
-            res.status(401).json({ message: "Login failed" });
+            res.status(200).json({ username: user });
         }
+    } catch (err) {
+        console.log(err);
+        next(err);
+    }
+};
+
+exports.getAllUsers = async (req, res, next) => {
+    try {
+        const [users, _] = await User.getUsers();
+
+        res.status(200).json({ users: users });
     } catch (err) {
         console.log(err);
         next(err);
