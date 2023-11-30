@@ -25,6 +25,7 @@ export default {
 
 <style scoped>
 .card {
+    cursor: pointer;
     background: #f9f9f9;
     position: relative;
     border: 1px solid #ccc;
@@ -47,8 +48,8 @@ export default {
 }
 
 .card:hover:after {
-    top: 7px;
-    left: 7px;
+    top: 10px;
+    left: 10px;
 }
 
 .title {

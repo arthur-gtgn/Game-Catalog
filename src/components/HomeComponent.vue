@@ -2,7 +2,7 @@
     <div class="home">
         <SiteTopBar />
 
-        <div>
+        <div class="list">
             <h2>LIST OF GAMES</h2>
             <ul>
                 <li v-for="game in games" :key="game.game_id">
@@ -50,6 +50,12 @@ export default {
 </script>
 
 <style scoped>
+.list {
+    margin-top: 25px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
 h2 {
     color: aliceblue;
 }
