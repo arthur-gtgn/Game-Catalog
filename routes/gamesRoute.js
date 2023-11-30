@@ -7,6 +7,6 @@ router.route("/").get(gameController.getAllGames);
     
 router.route("/addGame").post(gameController.createGame);
 
-router.route("/:id").get(gameController.getGameByID);
-router.route("/:id/update").put(gameController.updateGame);
+//router.route("/:id").get(gameController.getGameByID);
+//router.route("/:id/update").put(gameController.updateGame);
 module.exports = router;

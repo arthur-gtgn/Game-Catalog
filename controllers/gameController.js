@@ -20,8 +20,8 @@ exports.createGame = async (req, res, next) => {
             age_rating,
             description,
         } = req.body;
-        console.log("Données reçues du client :", req.body);
 
+        console.log("Données reçues du client :", req.body);
 
         let game = new Game(
             game_id,
@@ -34,7 +34,7 @@ exports.createGame = async (req, res, next) => {
 
         game = await game.save();
 
-        res.send(201).json({ message: "Game created" });
+        res.status(201).json({ message: "Game created" });
     } catch (error) {
         console.log(error);
         next(error);
