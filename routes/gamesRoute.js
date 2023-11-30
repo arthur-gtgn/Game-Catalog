@@ -9,4 +9,5 @@ router
 
 router.route("/:id").get(gameController.getGameByID);
 router.route("/:id/update").put(gameController.updateGame);
+
 module.exports = router;
