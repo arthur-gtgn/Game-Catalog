@@ -13,7 +13,7 @@
                     👀 I’m interested in {{ topic1 }} and {{ topic2 }}<br />
                     🌱 Coding in {{ lang1 }}, {{ lang2 }} and {{ lang3 }}<br />
                 </p>
-                <a :href="gitLink">My GitHub</a>
+                <a href="`${gitLink}`">My GitHub</a>
             </div>
         </div>
     </div>
