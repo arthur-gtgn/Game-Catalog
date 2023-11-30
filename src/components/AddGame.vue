@@ -5,6 +5,8 @@
         
       <h2>Ajouter un nouveau jeu</h2>
       <form @submit.prevent="addGame">
+        <label for="game_id">ID du jeu:</label>
+      <input type="text" v-model="newGame.game_id" required>
         <label for="game_name">Nom du jeu:</label>
                 <input type="text" v-model="newGame.game_name" required>
 
@@ -36,6 +38,7 @@
     data() {
       return {
         newGame: {
+          game_id: "",
           game_name: "",
           category: "",
           release_date: "",
@@ -49,8 +52,9 @@
         axios
           .post("http://localhost:3000/games/addGame", this.newGame)
           .then(() => {
-            // Réinitialiser le formulaire après l'ajout du jeu
+            console.log("Jeu ajouté avec succès");
             this.newGame = {
+              game_id: "",
               game_name: "",
               category: "",
               release_date: "",

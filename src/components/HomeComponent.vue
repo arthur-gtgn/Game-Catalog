@@ -1,4 +1,4 @@
-<!-- HomeComponent.vue -->
+
 <template>
     <div class="home">
       <SiteTopBar />

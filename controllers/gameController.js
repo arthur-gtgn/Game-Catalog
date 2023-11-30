@@ -20,6 +20,8 @@ exports.createGame = async (req, res, next) => {
             age_rating,
             description,
         } = req.body;
+        console.log("Données reçues du client :", req.body);
+
 
         let game = new Game(
             game_id,

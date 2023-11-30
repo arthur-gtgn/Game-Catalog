@@ -25,8 +25,8 @@ class Game {
             "${this.game_name}",
             "${this.category}",
             "${this.release_date}",
-            ${this.age_rating})
-            "${this.description}";`;
+            ${this.age_rating},
+            "${this.description}");`;
         return db.execute(sql);
     }
 
