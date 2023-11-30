@@ -31,3 +31,4 @@ app.listen(process.env.WEB_PORT, "0.0.0.0", function () {
 });
 
 app.use("/games", require("./routes/gamesRoute"));
+app.use("/login", require("./routes/loginRoute"));
