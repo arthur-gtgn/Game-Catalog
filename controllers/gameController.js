@@ -1,9 +1,22 @@
 const Game = require("../models/Game");
 
+// Fonction pour formater la date
+const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+};
+
 exports.getAllGames = async (req, res, next) => {
     try {
         const [games, _] = await Game.findAll();
-        res.status(200).json({ count: games.length, games: games });
+
+        // Formater la date pour chaque jeu dans la liste
+        const formattedGames = games.map((game) => ({
+            ...game,
+            release_date: formatDate(game.release_date),
+        }));
+
+        res.status(200).json({ count: formattedGames.length, games: formattedGames });
     } catch (err) {
         console.log(err);
         next(err);
@@ -31,9 +44,7 @@ exports.createGame = async (req, res, next) => {
         );
 
         await game.save();
-        //[game,_] = await Game.findByID(game_id)
-        //console.log(game[0])
-        res.status(201).json({ message: "Game created" , game : game[0] });
+        res.status(201).json({ message: "Game created", game: game[0] });
     } catch (error) {
         console.log(error);
         next(error);
