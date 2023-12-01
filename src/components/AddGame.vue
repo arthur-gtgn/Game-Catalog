@@ -4,10 +4,7 @@
     <div>
         
       <h2>Ajouter un nouveau jeu</h2>
-      <form @submit.prevent="addGame">
-
-        <label for="game_id">ID du jeu:</label>
-        <input type="text" v-model="newGame.game_id" required>
+      <form  @submit.prevent="addGame">
 
         <label for="game_name">Nom du jeu:</label>
         <input type="text" v-model="newGame.game_name" required>
@@ -40,7 +37,6 @@
     data() {
       return {
         newGame: {
-          game_id: "",
           game_name: "",
           category: "",
           release_date: "",
@@ -50,26 +46,29 @@
       };
     },
     methods: {
-      addGame() {
-        axios
-          .post("http://localhost:3000/games/addGame", this.newGame)
-          .then(() => {
-            console.log("Jeu ajouté avec succès");
-            this.newGame = {
-              game_id: "",
-              game_name: "",
-              category: "",
-              release_date: "",
-              age_rating: "",
-              description: "",
-            };
-           
-          })
-          .catch((error) => {
-            console.error("Erreur lors de l'ajout du jeu", error);
-          });
-      },
-    },
+  addGame() {
+    axios
+      .post("http://localhost:3000/games/addGame", this.newGame)
+      .then(response => {
+        if (response.data && response.data.message === "Game created") {
+          console.log("Jeu ajouté avec succès");
+          this.newGame = {
+            game_name: "",
+            category: "",
+            release_date: "",
+            age_rating: "",
+            description: "",
+          };
+        } else {
+          console.error("Réponse inattendue du serveur");
+        }
+      })
+      .catch((error) => {
+        console.error("Erreur lors de l'ajout du jeu", error);
+      });
+  },
+},
+
   };
   </script>
   

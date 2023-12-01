@@ -13,7 +13,6 @@ exports.getAllGames = async (req, res, next) => {
 exports.createGame = async (req, res, next) => {
     try {
         let {
-            game_id,
             game_name,
             category,
             release_date,
@@ -24,7 +23,6 @@ exports.createGame = async (req, res, next) => {
         console.log("Données reçues du client :", req.body);
 
         let game = new Game(
-            game_id,
             game_name,
             category,
             release_date,
@@ -32,9 +30,10 @@ exports.createGame = async (req, res, next) => {
             description
         );
 
-        game = await game.save();
-
-        res.status(201).json({ message: "Game created" });
+        await game.save();
+        //[game,_] = await Game.findByID(game_id)
+        //console.log(game[0])
+        res.status(201).json({ message: "Game created" , game : game[0] });
     } catch (error) {
         console.log(error);
         next(error);
