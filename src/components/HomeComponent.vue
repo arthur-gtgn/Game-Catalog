@@ -17,6 +17,8 @@
               :release_date="game.release_date.substring(0, 10)"
               :description="game.description"
               :rating="game.age_rating"
+              :gameId="game.game_id"
+              @delete-game="deleteGame"
             />
           </li>
         </ul>
@@ -54,6 +56,17 @@
             console.error("Erreur lors de la récupération des jeux", error);
           });
       },
+      deleteGame(gameId) {
+        axios
+          .delete(`http://localhost:3000/games/delete/${gameId}`)
+          .then(() => {
+              console.log("Jeu supprimé avec succès");
+              this.recupGames();
+          })
+          .catch((error) => {
+              console.error("Erreur lors de la suppression du jeu", error);
+          });
+        },
     },
   };
   </script>

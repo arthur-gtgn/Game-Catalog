@@ -42,6 +42,10 @@ class Game {
         let sql = `ALTER TABLE Game UPDATE game_name = "${n_game_name}", category = "${n_category}", release_date = "${n_release_date}", age_rating = ${n_age_rating} WHERE game_id = ${game_id};`;
         return db.execute(sql);
     }
+    static deleteGameById(gameId) {
+        let sql = `DELETE FROM Game WHERE game_id = ${gameId}`;
+        return db.execute(sql);
+    }
 }
 
 module.exports = Game;
