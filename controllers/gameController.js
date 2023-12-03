@@ -76,3 +76,14 @@ exports.updateGame = async (req, res, next) => {
         next(err);
     }
 };
+exports.deleteGame = async (req, res, next) => {
+    try {
+        const gameId = req.params.id;
+        await Game.deleteGameById(gameId);
+
+        res.status(200).json({ message: "Game deleted successfully" });
+    } catch (err) {
+        console.log(err);
+        next(err);
+    }
+};
