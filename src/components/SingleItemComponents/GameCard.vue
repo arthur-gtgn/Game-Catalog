@@ -7,8 +7,8 @@
             <span class="release-date">{{ release_date }}</span>
             <span class="rating">PEGI {{ rating }}</span>
             <br />
-            <button @click="deleteGame" class="delete-button">Delete</button>
-            <button @click="editGame" class="edit-button">Modify</button>
+            <button @click.prevent="deleteGame" class="delete-button">Delete</button>
+            <button @click.prevent="editGame" class="edit-button">Modify</button>
         </div>
     </div>
 </template>

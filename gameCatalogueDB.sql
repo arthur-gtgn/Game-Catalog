@@ -6,9 +6,10 @@ DROP TABLE IF EXISTS played_on;
 DROP TABLE IF EXISTS review_by;
 DROP TABLE IF EXISTS test_review;
 DROP TABLE IF EXISTS Company;
+DROP TABLE IF EXISTS Review;
 DROP TABLE IF EXISTS Game;
 DROP TABLE IF EXISTS Platform;
-DROP TABLE IF EXISTS Review;
+
 DROP TABLE IF EXISTS Reviewer;
 DROP TABLE IF EXISTS Users;
 
@@ -95,7 +96,6 @@ CREATE TABLE Review (
     description VARCHAR(500) NOT NULL,
     grade SMALLINT,
     author VARCHAR(50) NOT NULL,
-    reference VARCHAR(50),
     game_id INT,
     FOREIGN KEY (game_id) REFERENCES game(game_id)
     -- PRIMARY KEY (review_id)
@@ -142,7 +142,7 @@ INSERT INTO Game (game_name, category, release_date, age_rating, description)
 VALUES ( 'FIFA 23', 'Sports', '2023-09-15', 3,
         'The latest in the FIFA series, offering enhanced football simulation with improved graphics and gameplay mechanics for a more immersive experience.'),
        ( 'The Legend of Zelda: Tears of the Kingdom', 'Adventure', '2023-11-20', 10,
-        'Breath of the Wild 2" (Adventure, 2023-11-20, Age 10+): A sequel to the acclaimed open-world adventure game, expanding the story and world of Hyrule with new puzzles and challenges.'),
+        'Breath of the Wild 2: A sequel to the acclaimed open-world adventure game, expanding the story and world of Hyrule with new puzzles and challenges.'),
        ('Call of Duty: Warzone', 'Shooter', '2023-05-10', 18,
         'A high-octane shooter game set in a dynamic warzone, featuring intense, fast-paced combat and strategic gameplay elements.'),
        ('Horizon Forbidden West', 'Action', '2023-02-18', 16,
@@ -167,13 +167,13 @@ VALUES
     ('Polygon', 20, TRUE, 'www.polygon.com'),
     ('Metacritic', 15, FALSE, 'www.metacritic.com');
 
-INSERT INTO Review ( description, grade, author, reference, game_id)
+INSERT INTO Review ( description, grade, author, game_id)
 VALUES
-    ('An exciting sports game.', 90, 'John Doe', 'www.gamespot.com/review/fifa23',1),
-    ('A fantastic adventure game.', 95, 'Jane Smith', 'www.ign.com/review/zelda-breath-wild-2',2),
-    ('Action-packed shooter.', 85, 'Mike Johnson', 'www.kotaku.com/review/call-of-duty-warzone',3),
-    ('A great action game.', 88, 'Sarah Brown', 'www.polygon.com/review/horizon-forbidden-west',4),
-    ('Immersive RPG experience.', 89, 'Chris Lee', 'www.metacritic.com/review/assassins-creed-valhalla',5);
+    ('An exciting sports game.', 90, 'John Doe',1),
+    ('A fantastic adventure game.', 95, 'Jane Smith',2),
+    ('Action-packed shooter.', 85, 'Mike Johnson',3),
+    ('A great action game.', 88, 'Sarah Brown',4),
+    ('Immersive RPG experience.', 89, 'Chris Lee',5);
 
 INSERT INTO sold_at (game_id, company_id, price)
 VALUES

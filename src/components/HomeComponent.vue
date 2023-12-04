@@ -11,6 +11,9 @@
   
         <ul>
           <li v-for="game in games" :key="game.game_id">
+            <router-link
+            :to="{ name: 'GameDetails', params: { id: game.game_id }}"
+            class="game-link">            
             <GameCard
               :title="game.game_name"
               :category="game.category"
@@ -21,6 +24,7 @@
               @delete-game="deleteGame"
               @edit-game="editGame"
             />
+          </router-link>
           </li>
         </ul>
       </div>
@@ -98,5 +102,9 @@
   li {
     width: calc(33.333% - 20px);
   }
+  .game-link {
+  text-decoration: none;
+  color: inherit;
+}
   </style>
   
