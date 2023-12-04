@@ -76,6 +76,7 @@ CREATE TABLE Platform (
 CREATE TABLE played_on (
     platform_id INT,
     game_id INT,
+    PRIMARY KEY(game_id, platform_id),
     FOREIGN KEY (game_id) REFERENCES Game(game_id),
     FOREIGN KEY (platform_id) REFERENCES Platform(platform_id)
 );
@@ -94,9 +95,9 @@ CREATE TABLE Review (
     description VARCHAR(500) NOT NULL,
     grade SMALLINT,
     author VARCHAR(50) NOT NULL,
-    reference VARCHAR(50)
-    -- reviewer SMALLINT NOT NULL,
-    -- FOREIGN KEY (reviewer) REFERENCES Reviewer(reviewer_id),
+    reference VARCHAR(50),
+    game_id INT,
+    FOREIGN KEY (game_id) REFERENCES game(game_id)
     -- PRIMARY KEY (review_id)
 );
 
@@ -166,13 +167,13 @@ VALUES
     ('Polygon', 20, TRUE, 'www.polygon.com'),
     ('Metacritic', 15, FALSE, 'www.metacritic.com');
 
-INSERT INTO Review ( description, grade, author, reference)
+INSERT INTO Review ( description, grade, author, reference, game_id)
 VALUES
-    ('An exciting sports game.', 90, 'John Doe', 'www.gamespot.com/review/fifa23'),
-    ('A fantastic adventure game.', 95, 'Jane Smith', 'www.ign.com/review/zelda-breath-wild-2'),
-    ('Action-packed shooter.', 85, 'Mike Johnson', 'www.kotaku.com/review/call-of-duty-warzone'),
-    ('A great action game.', 88, 'Sarah Brown', 'www.polygon.com/review/horizon-forbidden-west'),
-    ('Immersive RPG experience.', 89, 'Chris Lee', 'www.metacritic.com/review/assassins-creed-valhalla');
+    ('An exciting sports game.', 90, 'John Doe', 'www.gamespot.com/review/fifa23',1),
+    ('A fantastic adventure game.', 95, 'Jane Smith', 'www.ign.com/review/zelda-breath-wild-2',2),
+    ('Action-packed shooter.', 85, 'Mike Johnson', 'www.kotaku.com/review/call-of-duty-warzone',3),
+    ('A great action game.', 88, 'Sarah Brown', 'www.polygon.com/review/horizon-forbidden-west',4),
+    ('Immersive RPG experience.', 89, 'Chris Lee', 'www.metacritic.com/review/assassins-creed-valhalla',5);
 
 INSERT INTO sold_at (game_id, company_id, price)
 VALUES
