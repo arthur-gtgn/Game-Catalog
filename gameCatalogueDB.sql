@@ -129,13 +129,13 @@ DELIMITER ;
 
 
 
-INSERT INTO Company (company_id, company_name, ceo, nb_employees, market_value, reseller)
+INSERT INTO Company ( company_name, ceo, nb_employees, market_value, reseller)
 VALUES
-    (1, 'Electronic Arts', 'Andrew Wilson', 9000, 12.45, TRUE),
-    (2, 'Nintendo', 'Shuntaro Furukawa', 6000, 85.20, FALSE),
-    (3, 'Activision Blizzard', 'Bobby Kotick', 8000, 45.70, TRUE),
-    (4, 'Sony Interactive Entertainment', 'Jim Ryan', 14000, 102.89, FALSE),
-    (5, 'Ubisoft', 'Yves Guillemot', 16000, 19.75, TRUE);
+    ( 'Electronic Arts', 'Andrew Wilson', 9000, 12.45, TRUE),
+    ('Nintendo', 'Shuntaro Furukawa', 6000, 85.20, FALSE),
+    ('Activision Blizzard', 'Bobby Kotick', 8000, 45.70, TRUE),
+    ('Sony Interactive Entertainment', 'Jim Ryan', 14000, 102.89, FALSE),
+    ('Ubisoft', 'Yves Guillemot', 16000, 19.75, TRUE);
 
 INSERT INTO Game (game_name, category, release_date, age_rating, description)
 VALUES ( 'FIFA 23', 'Sports', '2023-09-15', 3,
@@ -150,29 +150,29 @@ VALUES ( 'FIFA 23', 'Sports', '2023-09-15', 3,
         'A historical role-playing game where players explore the Viking era, engaging in epic battles and strategic gameplay while unraveling a deep storyline.');
 
 
-INSERT INTO Platform (platform_id, platform_name, price, release_date, current_gen, company)
+INSERT INTO Platform ( platform_name, price, release_date, current_gen, company)
 VALUES
-    (1, 'PlayStation 5', 499, '2020-11-12', TRUE, 'Sony Interactive Entertainment'),
-    (2, 'Xbox Series X', 499, '2020-11-10', TRUE, 'Microsoft'),
-    (3, 'Nintendo Switch', 299, '2017-03-03', TRUE, 'Nintendo'),
-    (4, 'PC', 0, NULL, TRUE, 'Various'),
-    (5, 'PlayStation 4', 299, '2013-11-15', FALSE, 'Sony Interactive Entertainment');
+    ( 'PlayStation 5', 499, '2020-11-12', TRUE, 'Sony Interactive Entertainment'),
+    ( 'Xbox Series X', 499, '2020-11-10', TRUE, 'Microsoft'),
+    ('Nintendo Switch', 299, '2017-03-03', TRUE, 'Nintendo'),
+    ('PC', 0, NULL, TRUE, 'Various'),
+    ('PlayStation 4', 299, '2013-11-15', FALSE, 'Sony Interactive Entertainment');
 
-INSERT INTO Reviewer (reviewer_id, reviewer_name, nb_journalists, has_gamers_interaction, website)
+INSERT INTO Reviewer (reviewer_name, nb_journalists, has_gamers_interaction, website)
 VALUES
-    (1, 'GameSpot', 50, TRUE, 'www.gamespot.com'),
-    (2, 'IGN', 45, TRUE, 'www.ign.com'),
-    (3, 'Kotaku', 30, TRUE, 'www.kotaku.com'),
-    (4, 'Polygon', 20, TRUE, 'www.polygon.com'),
-    (5, 'Metacritic', 15, FALSE, 'www.metacritic.com');
+    ('GameSpot', 50, TRUE, 'www.gamespot.com'),
+    ('IGN', 45, TRUE, 'www.ign.com'),
+    ('Kotaku', 30, TRUE, 'www.kotaku.com'),
+    ('Polygon', 20, TRUE, 'www.polygon.com'),
+    ('Metacritic', 15, FALSE, 'www.metacritic.com');
 
-INSERT INTO Review (review_id, description, grade, author, reference)
+INSERT INTO Review ( description, grade, author, reference)
 VALUES
-    (1, 'An exciting sports game.', 90, 'John Doe', 'www.gamespot.com/review/fifa23'),
-    (2, 'A fantastic adventure game.', 95, 'Jane Smith', 'www.ign.com/review/zelda-breath-wild-2'),
-    (3, 'Action-packed shooter.', 85, 'Mike Johnson', 'www.kotaku.com/review/call-of-duty-warzone'),
-    (4, 'A great action game.', 88, 'Sarah Brown', 'www.polygon.com/review/horizon-forbidden-west'),
-    (5, 'Immersive RPG experience.', 89, 'Chris Lee', 'www.metacritic.com/review/assassins-creed-valhalla');
+    ('An exciting sports game.', 90, 'John Doe', 'www.gamespot.com/review/fifa23'),
+    ('A fantastic adventure game.', 95, 'Jane Smith', 'www.ign.com/review/zelda-breath-wild-2'),
+    ('Action-packed shooter.', 85, 'Mike Johnson', 'www.kotaku.com/review/call-of-duty-warzone'),
+    ('A great action game.', 88, 'Sarah Brown', 'www.polygon.com/review/horizon-forbidden-west'),
+    ('Immersive RPG experience.', 89, 'Chris Lee', 'www.metacritic.com/review/assassins-creed-valhalla');
 
 INSERT INTO sold_at (game_id, company_id, price)
 VALUES
