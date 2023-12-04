@@ -38,10 +38,23 @@ class Game {
         return db.execute(sql);
     }
 
-    update(n_game_name, n_category, n_release_date, n_age_rating, game_id) {
+    /*update(n_game_name, n_category, n_release_date, n_age_rating, game_id) {
         let sql = `ALTER TABLE Game UPDATE game_name = "${n_game_name}", category = "${n_category}", release_date = "${n_release_date}", age_rating = ${n_age_rating} WHERE game_id = ${game_id};`;
         return db.execute(sql);
+    }*/
+    static update(game_name, category, release_date, age_rating, description, game_id) {
+        let sql = `
+            UPDATE Game 
+            SET game_name = "${game_name}",
+                category = "${category}",
+                release_date = "${release_date}",
+                age_rating = ${age_rating},
+                description = "${description}"
+            WHERE game_id = ${game_id};`;
+
+        return db.execute(sql);
     }
+
     static deleteGameById(gameId) {
         let sql = `DELETE FROM Game WHERE game_id = ${gameId}`;
         return db.execute(sql);

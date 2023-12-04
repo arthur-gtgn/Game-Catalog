@@ -6,11 +6,14 @@
       <div class="list">
         <h2>LIST OF GAMES</h2>
         <router-link to="/addGame">
-          <button>Ajouter un jeu</button>
+          <button>Add Game</button>
         </router-link>
   
         <ul>
           <li v-for="game in games" :key="game.game_id">
+            <router-link
+            :to="{ name: 'GameDetails', params: { id: game.game_id }}"
+            class="game-link">            
             <GameCard
               :title="game.game_name"
               :category="game.category"
@@ -19,7 +22,9 @@
               :rating="game.age_rating"
               :gameId="game.game_id"
               @delete-game="deleteGame"
+              @edit-game="editGame"
             />
+          </router-link>
           </li>
         </ul>
       </div>
@@ -67,6 +72,10 @@
               console.error("Erreur lors de la suppression du jeu", error);
           });
         },
+        editGame(gameId) {
+          console.log(gameId); // Assurez-vous que gameId est défini
+          this.$router.push({ name: 'EditGame', params: { id: gameId } });
+        },
     },
   };
   </script>
@@ -93,5 +102,9 @@
   li {
     width: calc(33.333% - 20px);
   }
+  .game-link {
+  text-decoration: none;
+  color: inherit;
+}
   </style>
   
