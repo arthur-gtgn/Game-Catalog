@@ -22,25 +22,25 @@ CREATE TABLE Users(
 );
 
 CREATE TABLE Company (
-    company_id INT,
+    company_id INT AUTO_INCREMENT PRIMARY KEY,
     company_name VARCHAR(50),
     ceo VARCHAR(50),
     nb_employees INT,
     market_value DECIMAL(15,2),
-    reseller BOOL,
-    PRIMARY KEY(company_id)
+    reseller BOOL
+	-- PRIMARY KEY(company_id)
 );
 
 CREATE TABLE Game(
-    game_id INT,
+    game_id INT AUTO_INCREMENT PRIMARY KEY,
     game_name VARCHAR(100),
     category VARCHAR(50),
     release_date DATE,
     age_rating SMALLINT,
-    description VARCHAR(500),
+    description VARCHAR(500)
     -- reseller VARCHAR(50) NOT NULL,
     -- developer VARCHAR(50) NOT NULL,
-    PRIMARY KEY(game_id)
+    -- PRIMARY KEY(game_id)
     -- FOREIGN KEY(reseller) REFERENCES sold_at(company_name),
     -- FOREIGN KEY (developer) REFERENCES developed_by(company_name)
 );
@@ -64,13 +64,13 @@ CREATE TABLE sold_at (
 );
 
 CREATE TABLE Platform (
-    platform_id INT,
+    platform_id INT AUTO_INCREMENT PRIMARY KEY,
     platform_name VARCHAR(50),
     price INT,
     release_date DATE,
     current_gen BOOLEAN,
-    company VARCHAR(50),
-    PRIMARY KEY (platform_id)
+    company VARCHAR(50)
+    -- PRIMARY KEY (platform_id)
 );
 
 CREATE TABLE played_on (
@@ -81,23 +81,23 @@ CREATE TABLE played_on (
 );
 
 CREATE TABLE Reviewer (
-    reviewer_id INT,
+    reviewer_id INT AUTO_INCREMENT PRIMARY KEY,
     reviewer_name VARCHAR(50),
     nb_journalists INT,
     has_gamers_interaction BOOLEAN,
-    website VARCHAR(50),
-    PRIMARY KEY (reviewer_id)
+    website VARCHAR(50)
+    -- PRIMARY KEY (reviewer_id)
 );
 
 CREATE TABLE Review (
-    review_id INT,
+    review_id INT AUTO_INCREMENT PRIMARY KEY,
     description VARCHAR(500) NOT NULL,
     grade SMALLINT,
     author VARCHAR(50) NOT NULL,
-    reference VARCHAR(50),
+    reference VARCHAR(50)
     -- reviewer SMALLINT NOT NULL,
     -- FOREIGN KEY (reviewer) REFERENCES Reviewer(reviewer_id),
-    PRIMARY KEY (review_id)
+    -- PRIMARY KEY (review_id)
 );
 
 
@@ -137,16 +137,16 @@ VALUES
     (4, 'Sony Interactive Entertainment', 'Jim Ryan', 14000, 102.89, FALSE),
     (5, 'Ubisoft', 'Yves Guillemot', 16000, 19.75, TRUE);
 
-INSERT INTO Game (game_id, game_name, category, release_date, age_rating, description)
-VALUES (1, 'FIFA 23', 'Sports', '2023-09-15', 3,
+INSERT INTO Game (game_name, category, release_date, age_rating, description)
+VALUES ( 'FIFA 23', 'Sports', '2023-09-15', 3,
         'The latest in the FIFA series, offering enhanced football simulation with improved graphics and gameplay mechanics for a more immersive experience.'),
-       (2, 'The Legend of Zelda: Tears of the Kingdom', 'Adventure', '2023-11-20', 10,
+       ( 'The Legend of Zelda: Tears of the Kingdom', 'Adventure', '2023-11-20', 10,
         'Breath of the Wild 2" (Adventure, 2023-11-20, Age 10+): A sequel to the acclaimed open-world adventure game, expanding the story and world of Hyrule with new puzzles and challenges.'),
-       (3, 'Call of Duty: Warzone', 'Shooter', '2023-05-10', 18,
+       ('Call of Duty: Warzone', 'Shooter', '2023-05-10', 18,
         'A high-octane shooter game set in a dynamic warzone, featuring intense, fast-paced combat and strategic gameplay elements.'),
-       (4, 'Horizon Forbidden West', 'Action', '2023-02-18', 16,
+       ('Horizon Forbidden West', 'Action', '2023-02-18', 16,
         'An action-packed game set in a beautifully detailed post-apocalyptic world, combining exploration, combat, and a compelling narrative.'),
-       (5, 'Assassins Creed: Valhalla', 'Role-Playing', '2022-11-10', 17,
+       ('Assassins Creed: Valhalla', 'Role-Playing', '2022-11-10', 17,
         'A historical role-playing game where players explore the Viking era, engaging in epic battles and strategic gameplay while unraveling a deep storyline.');
 
 
@@ -197,6 +197,11 @@ VALUES
     (3, 1),
     (4, 5),
     (5, 4);
+    
+select * from game;
+delete from game where game_id = 7;
+
+
 
 INSERT INTO Users VALUES (NULL, now(), 'Arthur', 'arthur.gatignol@efrei.net', 'ADMIN', SHA2(CONCAT(NOW(), 'administrator'), 224));
 INSERT INTO Users VALUES (NULL, now(), 'Romain', 'romain.samson@efrei.net', 'ADMIN', SHA2(CONCAT(NOW(), 'administrator2'), 224));

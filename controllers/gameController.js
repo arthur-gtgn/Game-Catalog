@@ -64,7 +64,7 @@ exports.getGameByID = async (req, res, next) => {
     }
 };
 
-exports.updateGame = async (req, res, next) => {
+/*exports.updateGame = async (req, res, next) => {
     try {
         let gameID = req.params.id;
         let { game_name, category, release_date, age_rating } = req.body;
@@ -75,7 +75,35 @@ exports.updateGame = async (req, res, next) => {
         console.log(err);
         next(err);
     }
-};
+};*/
+exports.updateGame = async (req, res, next) => {
+    try {
+      const gameID = req.params.id;
+      const { game_name, category, release_date, age_rating, description } = req.body;
+  
+      // Check if the game exists
+      const [existingGame, _] = await Game.findByID(gameID);
+      if (!existingGame || existingGame.length === 0) {
+        return res.status(404).json({ message: "Game not found" });
+      }
+  
+      // Update the game details
+      const [updatedGame, __] = await Game.update(
+        game_name,
+        category,
+        release_date,
+        age_rating,
+        description,
+        gameID
+      );
+  
+      res.status(200).json({ message: "Game updated successfully", game: updatedGame[0] });
+    } catch (err) {
+      console.error(err);
+      next(err);
+    }
+  };
+  
 exports.deleteGame = async (req, res, next) => {
     try {
         const gameId = req.params.id;

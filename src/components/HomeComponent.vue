@@ -6,7 +6,7 @@
       <div class="list">
         <h2>LIST OF GAMES</h2>
         <router-link to="/addGame">
-          <button>Ajouter un jeu</button>
+          <button>Add Game</button>
         </router-link>
   
         <ul>
@@ -19,6 +19,7 @@
               :rating="game.age_rating"
               :gameId="game.game_id"
               @delete-game="deleteGame"
+              @edit-game="editGame"
             />
           </li>
         </ul>
@@ -66,6 +67,10 @@
           .catch((error) => {
               console.error("Erreur lors de la suppression du jeu", error);
           });
+        },
+        editGame(gameId) {
+          console.log(gameId); // Assurez-vous que gameId est défini
+          this.$router.push({ name: 'EditGame', params: { id: gameId } });
         },
     },
   };

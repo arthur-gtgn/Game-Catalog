@@ -6,6 +6,7 @@ import App from "./App.vue";
 import ExplainComponent from "@/components/ExplainComponent.vue";
 import login from "@/components/login.vue";
 import addGame from "@/components/AddGame.vue";
+import EditGame from "@/components/EditGame.vue";
 
 import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
@@ -23,6 +24,11 @@ const router = createRouter({
         { path: "/explain", component: ExplainComponent },
         { path: "/login", component: login },
         { path: "/addGame", component: addGame },
+        {
+            path: '/editGame/:id',
+            name: 'EditGame',
+            component: EditGame,
+          },
     ],
 });
 

@@ -3,25 +3,25 @@
     <SiteTopBar/>
     <div>
         
-      <h2>Ajouter un nouveau jeu</h2>
+      <h2>Add a new game</h2>
       <form  @submit.prevent="addGame">
 
-        <label for="game_name">Nom du jeu:</label>
+        <label for="game_name">Name of the game:</label>
         <input type="text" v-model="newGame.game_name" required>
 
-        <label for="category">Catégorie:</label>
+        <label for="category">Category:</label>
         <input type="text" v-model="newGame.category" required>
 
-        <label for="release_date">Date de sortie:</label>
+        <label for="release_date">Release date</label>
         <input type="date" v-model="newGame.release_date" required>
 
-        <label for="age_rating">Classification d'âge:</label>
+        <label for="age_rating">Age classification:</label>
         <input type="number" v-model="newGame.age_rating" required>
 
         <label for="description">Description:</label>
         <textarea v-model="newGame.description" required></textarea>
 
-        <button type="submit">Ajouter le jeu</button>
+        <button type="submit">Add Game</button>
        
       </form>
     </div>
@@ -59,6 +59,7 @@
             age_rating: "",
             description: "",
           };
+          this.$router.push({ path: '/' });
         } else {
           console.error("Réponse inattendue du serveur");
         }
