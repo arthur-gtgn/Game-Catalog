@@ -6,6 +6,9 @@
         <div class="footer">
             <span class="release-date">{{ release_date }}</span>
             <span class="rating">PEGI {{ rating }}</span>
+            <br />
+            <button @click.prevent="deleteGame" class="delete-button">Delete</button>
+            <button @click.prevent="editGame" class="edit-button">Modify</button>
         </div>
     </div>
 </template>
@@ -18,10 +21,23 @@ export default {
         category: String,
         release_date: String,
         description: String,
-        rating: String,
+        rating: Number,
+        gameId: Number,
+    },
+    methods: {
+        deleteGame() {
+            const gameId = this.gameId;
+            this.$emit("delete-game", gameId);
+        },
+        editGame() {
+            const gameId = this.gameId;
+            this.$emit("edit-game", gameId);
+        },
     },
 };
 </script>
+
+
 
 <style scoped>
 .card {

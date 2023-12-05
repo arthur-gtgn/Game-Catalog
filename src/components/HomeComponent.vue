@@ -1,4 +1,4 @@
-<!-- HomeComponent.vue -->
+
 <template>
     <div class="home">
       <SiteTopBar />
@@ -6,18 +6,25 @@
       <div class="list">
         <h2>LIST OF GAMES</h2>
         <router-link to="/addGame">
-          <button>Ajouter un jeu</button>
+          <button>Add Game</button>
         </router-link>
   
         <ul>
           <li v-for="game in games" :key="game.game_id">
+            <router-link
+            :to="{ name: 'GameDetails', params: { id: game.game_id }}"
+            class="game-link">            
             <GameCard
               :title="game.game_name"
               :category="game.category"
               :release_date="game.release_date.substring(0, 10)"
               :description="game.description"
               :rating="game.age_rating"
+              :gameId="game.game_id"
+              @delete-game="deleteGame"
+              @edit-game="editGame"
             />
+          </router-link>
           </li>
         </ul>
       </div>
@@ -46,7 +53,7 @@
     methods: {
       recupGames() {
         axios
-          .get("http://localhost:3000/games/")
+          .get("http://localhost:3000/games")
           .then((response) => {
             this.games = response.data.games;
           })
@@ -54,6 +61,21 @@
             console.error("Erreur lors de la récupération des jeux", error);
           });
       },
+      deleteGame(gameId) {
+        axios
+          .delete(`http://localhost:3000/games/delete/${gameId}`)
+          .then(() => {
+              console.log("Jeu supprimé avec succès");
+              this.recupGames();
+          })
+          .catch((error) => {
+              console.error("Erreur lors de la suppression du jeu", error);
+          });
+        },
+        editGame(gameId) {
+          console.log(gameId); // Assurez-vous que gameId est défini
+          this.$router.push({ name: 'EditGame', params: { id: gameId } });
+        },
     },
   };
   </script>
@@ -80,5 +102,9 @@
   li {
     width: calc(33.333% - 20px);
   }
+  .game-link {
+  text-decoration: none;
+  color: inherit;
+}
   </style>
   
