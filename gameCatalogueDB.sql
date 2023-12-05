@@ -19,7 +19,7 @@ CREATE TABLE Users(
     username VARCHAR(50) UNIQUE,
     email VARCHAR(50) UNIQUE,
     role VARCHAR(50),
-    password VARCHAR(100)
+    password VARCHAR(60)
 );
 
 CREATE TABLE Company (
@@ -141,9 +141,10 @@ VALUES
 INSERT INTO Game (game_name, category, release_date, age_rating, description)
 VALUES ( 'FIFA 23', 'Sports', '2023-09-15', 3,
         'The latest in the FIFA series, offering enhanced football simulation with improved graphics and gameplay mechanics for a more immersive experience.'),
-       ( 'The Legend of Zelda: Tears of the Kingdom', 'Adventure', '2023-11-20', 10,
-        'Breath of the Wild 2: A sequel to the acclaimed open-world adventure game, expanding the story and world of Hyrule with new puzzles and challenges.'),
-       ('Call of Duty: Warzone', 'Shooter', '2023-05-10', 18,
+
+       (2, 'The Legend of Zelda: Tears of the Kingdom', 'Adventure', '2023-11-20', 10,
+        'A sequel to the acclaimed open-world adventure game, expanding the story and world of Hyrule with new puzzles and challenges.'),
+       (3, 'Call of Duty: Warzone', 'Shooter', '2023-05-10', 18,
         'A high-octane shooter game set in a dynamic warzone, featuring intense, fast-paced combat and strategic gameplay elements.'),
        ('Horizon Forbidden West', 'Action', '2023-02-18', 16,
         'An action-packed game set in a beautifully detailed post-apocalyptic world, combining exploration, combat, and a compelling narrative.'),
@@ -198,11 +199,4 @@ VALUES
     (3, 1),
     (4, 5),
     (5, 4);
-    
-select * from game;
-delete from game where game_id = 7;
 
-
-
-INSERT INTO Users VALUES (NULL, now(), 'Arthur', 'arthur.gatignol@efrei.net', 'ADMIN', SHA2(CONCAT(NOW(), 'administrator'), 224));
-INSERT INTO Users VALUES (NULL, now(), 'Romain', 'romain.samson@efrei.net', 'ADMIN', SHA2(CONCAT(NOW(), 'administrator2'), 224));
