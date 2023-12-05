@@ -27,3 +27,14 @@ exports.getGameWithReviews = async (req, res, next) => {
         next(err);
     }
 };
+exports.deleteReview = async (req, res, next) => {
+  try {
+      const { gameId, reviewId } = req.params;
+      await Review.deleteReviewById(reviewId);
+
+      res.status(200).json({ message: "Review deleted successfully" });
+  } catch (err) {
+      console.log(err);
+      next(err);
+  }
+};

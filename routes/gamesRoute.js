@@ -16,5 +16,5 @@ router.route("/update/:id").put(gameController.updateGame);
 router.route("/review/:id")
   .get(reviewController.getGameWithReviews)
   .post(reviewController.addReview);
-
+router.route("/review/:gameId/:reviewId").delete(reviewController.deleteReview);
 module.exports = router;
