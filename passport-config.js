@@ -30,7 +30,6 @@ function initialize(passport) {
             }
         )
     );
-}
 
     passport.serializeUser((user, done) => {
         done(null, user.user_id);
