@@ -39,14 +39,26 @@ app.listen(process.env.WEB_PORT, "0.0.0.0", function () {
 
 app.use("/games", require("./routes/gamesRoute"));
 
-app.post(
-    "/login",
-    passport.authenticate("local", {
-        successRedirect: "/games",
-        failureRedirect: "/login",
-        failureFlash: true,
-    })
-);
+app.post("/login", (req, res, next) => {
+    passport.authenticate("local", (err, user, info) => {
+        if (err) {
+            return res
+                .status(500)
+                .json({ message: "Error while authenticating" });
+        }
+        if (!user) {
+            return res.status(401).json({ message: "Authentication failed" });
+        }
+        req.logIn(user, function (err) {
+            if (err) {
+                return res
+                    .status(500)
+                    .json({ message: "Error while logging in" });
+            }
+            return res.status(200).json({ message: "Login successful" });
+        });
+    })(req, res, next);
+});
 
 app.use("/register", require("./routes/registerRoute"));
 
