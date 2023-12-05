@@ -1,34 +1,50 @@
 const dotenv = require("dotenv");
-const serverStatic = require("serve-static");
-const express = require("express");
-const cors = require("cors");
-
 dotenv.config();
+
+const serverStatic = require("serve-static");
+
+const express = require("express");
+const session = require("express-session");
+const flash = require("express-flash");
+const passport = require("passport");
+const User = require("./models/User");
+
 const app = express();
+
+const initializePassport = require("./passport-config");
+
 app.use(serverStatic(__dirname + "/dist"));
 app.use(express.json());
-app.use(cors());
-const mysql = require("mysql2/promise");
-const conn = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASS,
-    debug: false,
-});
 
-/*
-conn.then(function (conn) {
-    conn.execute("SELECT * FROM Game").then(function (result) {
-        const [rows, fields] = result;
-        console.log(rows);
-    });
-});
-*/
+app.use(express.urlencoded({ extended: false }));
+app.use(flash());
+app.use(
+    session({
+        name: "user_sid",
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+    })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.listen(process.env.WEB_PORT, "0.0.0.0", function () {
     console.log("Listenning on " + process.env.WEB_PORT);
 });
 
 app.use("/games", require("./routes/gamesRoute"));
-app.use("/login", require("./routes/loginRoute"));
+
+app.post(
+    "/login",
+    passport.authenticate("local", {
+        successRedirect: "/games",
+        failureRedirect: "/login",
+        failureFlash: true,
+    })
+);
+
+app.use("/register", require("./routes/registerRoute"));
+
+module.exports = app;

@@ -18,7 +18,7 @@ CREATE TABLE Users(
     username VARCHAR(50) UNIQUE,
     email VARCHAR(50) UNIQUE,
     role VARCHAR(50),
-    password VARCHAR(100)
+    password VARCHAR(60)
 );
 
 CREATE TABLE Company (
@@ -197,6 +197,3 @@ VALUES
     (3, 1),
     (4, 5),
     (5, 4);
-
-INSERT INTO Users VALUES (NULL, now(), 'Arthur', 'arthur.gatignol@efrei.net', 'ADMIN', SHA2(CONCAT(NOW(), 'administrator'), 224));
-INSERT INTO Users VALUES (NULL, now(), 'Romain', 'romain.samson@efrei.net', 'ADMIN', SHA2(CONCAT(NOW(), 'administrator2'), 224));
