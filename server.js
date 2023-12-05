@@ -3,6 +3,7 @@ dotenv.config();
 
 const serverStatic = require("serve-static");
 
+const cors = require("cors");
 const express = require("express");
 const session = require("express-session");
 const flash = require("express-flash");
@@ -19,6 +20,7 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: false }));
 app.use(flash());
+app.use(cors());
 app.use(
     session({
         name: "user_sid",
