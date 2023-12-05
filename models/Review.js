@@ -8,14 +8,11 @@ class Review {
         this.gameId = gameId;
     }
 
-    save() {
+    static saveReview(description, grade, author, gameId) {
         let sql = `
-        INSERT INTO Review(description, grade, author, game_id)
-        VALUES(
-            "${this.description}",
-            ${this.grade},
-            "${this.author}",
-            ${this.gameId});`;
+            INSERT INTO Review(description, grade, author, game_id)
+            VALUES("${description}", ${grade}, "${author}", ${gameId});
+        `;
         return db.execute(sql);
     }
 

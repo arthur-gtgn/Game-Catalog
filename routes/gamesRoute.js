@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const gameController = require("../controllers/gameController");
 const reviewController = require("../controllers/reviewController");
-router.route("/").get(gameController.getAllGames);
-    
+
+router.route("/").get(gameController.getAllGames);   
     
 router.route("/addGame").post(gameController.createGame);
 
@@ -15,5 +15,5 @@ router.route("/update/:id").put(gameController.updateGame);
 
 router.route("/review/:id")
   .get(reviewController.getGameWithReviews)
-  .post(reviewController.createReview);
+  .post(reviewController.addReview);
 module.exports = router;
