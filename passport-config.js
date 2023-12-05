@@ -16,6 +16,7 @@ function initialize(passport) {
                         });
                     } else {
                         if (await bcrypt.compare(password, user[0].password)) {
+                            console.log(user[0]);
                             return done(null, user[0]);
                         } else {
                             return done(null, false, {
@@ -30,7 +31,7 @@ function initialize(passport) {
         )
     );
 
-    passport.serializeUser((user, done) => done(null, user.id));
+    passport.serializeUser((user, done) => done(null, user.user_id));
     passport.deserializeUser(async (id, done) => {
         try {
             const [user, _] = await User.getUserById(id);

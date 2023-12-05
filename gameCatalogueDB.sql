@@ -142,9 +142,9 @@ INSERT INTO Game (game_name, category, release_date, age_rating, description)
 VALUES ( 'FIFA 23', 'Sports', '2023-09-15', 3,
         'The latest in the FIFA series, offering enhanced football simulation with improved graphics and gameplay mechanics for a more immersive experience.'),
 
-       (2, 'The Legend of Zelda: Tears of the Kingdom', 'Adventure', '2023-11-20', 10,
+       ('The Legend of Zelda: Tears of the Kingdom', 'Adventure', '2023-11-20', 10,
         'A sequel to the acclaimed open-world adventure game, expanding the story and world of Hyrule with new puzzles and challenges.'),
-       (3, 'Call of Duty: Warzone', 'Shooter', '2023-05-10', 18,
+       ('Call of Duty: Warzone', 'Shooter', '2023-05-10', 18,
         'A high-octane shooter game set in a dynamic warzone, featuring intense, fast-paced combat and strategic gameplay elements.'),
        ('Horizon Forbidden West', 'Action', '2023-02-18', 16,
         'An action-packed game set in a beautifully detailed post-apocalyptic world, combining exploration, combat, and a compelling narrative.'),

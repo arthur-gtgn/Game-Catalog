@@ -12,6 +12,7 @@ const User = require("./models/User");
 const app = express();
 
 const initializePassport = require("./passport-config");
+initializePassport(passport);
 
 app.use(serverStatic(__dirname + "/dist"));
 app.use(express.json());
