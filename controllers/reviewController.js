@@ -14,16 +14,16 @@ exports.getGameWithReviews = async (req, res, next) => {
     }
   };
   
-exports.createReview = async (req, res, next) => {
+  exports.addReview = async (req, res, next) => {
     try {
-        const { description, grade, author, gameId } = req.body;
-        console.log('Request Body:', req.body);
-        const review = new Review(description, grade, author, gameId);
-        await review.save();
+        const { description, grade, author } = req.body;
+        const gameId = req.params.id;
 
-        res.status(201).json({ message: "Review created", review: review });
-    } catch (error) {
-        console.log(error);
-        next(error);
+        await Review.saveReview(description, grade, author, gameId);
+
+        res.status(201).json({ message: "Revue ajoutée avec succès" });
+    } catch (err) {
+        console.log(err);
+        next(err);
     }
 };

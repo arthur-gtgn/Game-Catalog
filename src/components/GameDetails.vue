@@ -17,7 +17,7 @@
       <ul>
         <li v-for="review in reviews" :key="review.review_id" class="review-item">
           <div class="review-content">
-            <p>by {{ review.author }}<br>Grade: {{ review.grade }}<br>Review: {{ review.description }}</p>
+            <p>by {{ review.author }}<br>Grade: {{ review.grade }} /100<br>Review: {{ review.description }}</p>
           </div>
         </li>
       </ul>
@@ -76,24 +76,23 @@
         });
       },
       submitReview() {
-        const gameId = this.$route.params.id;
-        axios.post(`http://localhost:3000/games/review/${this.game.game_id}`, this.newReview)
+            const gameId = this.$route.params.id;
+            axios.post(`http://localhost:3000/games/review/${gameId}`, this.newReview)
+                .then(() => {
+                    // Rechargez les détails du jeu, y compris les avis
+                    this.getGameDetails();
 
-          .then((response) => {
-            // Met à jour les avis après l'ajout d'une nouvelle critique
-            this.reviews.push(response.data.review);
-            // Réinitialisez le formulaire
-            this.newReview = {
-              description: "",
-              grade: null,
-              author: "",
-              
-            };
-          })
-          .catch((error) => {
-            console.error("Erreur lors de la soumission de la critique", error);
-          });
-      },
+                    // Réinitialisez le formulaire de revue
+                    this.newReview = {
+                        description: "",
+                        grade: null,
+                        author: "",
+                    };
+                })
+                .catch((error) => {
+                    console.error("Erreur lors de la soumission de la revue", error);
+                });
+        },
       goBack() {
         this.$router.push({ path: '/' });
       },
