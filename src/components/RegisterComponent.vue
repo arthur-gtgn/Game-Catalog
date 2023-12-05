@@ -15,10 +15,6 @@
                 required
             />
         </div>
-        <div class="role">
-            <label for="role">Role:</label>
-            <input type="text" id="role" v-model="userData.role" required />
-        </div>
         <div class="password">
             <label for="password">Password:</label>
             <input
@@ -46,7 +42,7 @@ export default {
             userData: {
                 username: "",
                 email: "",
-                role: "",
+                role: "USER",
                 password: "",
             },
         };
@@ -73,9 +69,6 @@ export default {
     color: white;
 }
 .username {
-    color: white;
-}
-.role {
     color: white;
 }
 .password {

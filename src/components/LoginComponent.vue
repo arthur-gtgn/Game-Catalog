@@ -44,7 +44,7 @@ export default {
                 .then((response) => {
                     if (response.status == 200) {
                         console.log("Login successful");
-                        this.$router.push("/games");
+                        this.$router.push("/");
                     } else {
                         console.log("Login failed");
                     }
