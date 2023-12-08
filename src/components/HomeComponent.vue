@@ -8,7 +8,6 @@
         <router-link to="/addGame">
           <button>Add Game</button>
         </router-link>
-  
         <ul>
           <li v-for="game in games" :key="game.game_id">
             <router-link
