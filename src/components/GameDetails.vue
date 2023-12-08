@@ -41,6 +41,14 @@
         <button type="submit">Submit Review</button>
       </form>
     </div>
+    <div>
+      <h2>Company Details</h2>
+      <p>Company Name: {{ company.company_name }}</p>
+      <p>CEO: {{ company.ceo }}</p>
+      <p>Number of Employees: {{ company.nb_employees }}</p>
+      <p>Market Value: {{ company.market_value }}</p>
+      <p>Reseller: {{ company.reseller ? 'Yes' : 'No' }}</p>
+    </div>
       <button @click="goBack">Back to Games</button>
     </div>
   </template>
@@ -58,6 +66,7 @@
     data() {
       return {
         game: {},
+        company: {},
         reviews: [],
         newReview: {
           description: "",
@@ -69,6 +78,7 @@
     },
     mounted() {
       this.getGameDetails();
+      this.getGameDetailswithCompany();
     },
     methods: {
       getGameDetails() {
@@ -76,6 +86,12 @@
         axios.get(`http://localhost:3000/games/review/${gameId}`).then((response) => {
           this.game = response.data.game;
           this.reviews = response.data.reviews;
+        });},
+        getGameDetailswithCompany() {
+        const gameId = this.$route.params.id;
+        axios.get(`http://localhost:3000/games/company/${gameId}`).then((response) => {
+          this.company = response.data.company;
+          
         });
       },
       submitReview() {
