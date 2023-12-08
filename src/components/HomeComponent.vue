@@ -72,10 +72,10 @@
               console.error("Erreur lors de la suppression du jeu", error);
           });
         },
-        editGame(gameId) {
-          console.log(gameId); // Assurez-vous que gameId est défini
-          this.$router.push({ name: 'EditGame', params: { id: gameId } });
-        },
+      editGame(gameId) {
+        console.log(gameId);
+        this.$router.push({ name: 'EditGame', params: { id: gameId } });
+      },
     },
   };
   </script>
