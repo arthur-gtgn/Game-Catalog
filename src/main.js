@@ -13,9 +13,14 @@ import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 import { OhVueIcon, addIcons } from "oh-vue-icons";
-import { LaCodepen } from "oh-vue-icons/icons";
+import {
+    LaCodepen,
+    SiMaildotru,
+    MdLockopen,
+    FaUserEdit,
+} from "oh-vue-icons/icons";
 
-addIcons(LaCodepen);
+addIcons(LaCodepen, SiMaildotru, MdLockopen, FaUserEdit);
 
 const router = createRouter({
     history: createWebHistory(),

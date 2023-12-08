@@ -1,42 +1,30 @@
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-const expect = chai.expect;
-const app = require("../server.js");
+const request = require("supertest");
+const app = require("../server");
 
-chai.use(chaiHttp);
-
-describe("Authentication", () => {
-    it("should login successfully with correct credentials", (done) => {
-        chai.request(app)
-            .post("/login") // Update with your route
-            .send({
-                email: "arthur.gatignol@gmail.com",
-                password: "administrator",
-            })
-            .end((err, res) => {
-                expect(res).to.have.status(200);
-                // Add more assertions here
-                done();
-            });
+describe("POST /login", () => {
+    it("should return 401 if authentication failed", async () => {
+        // TODO: Add test case for authentication failure
+        const response = await request(app)
+            .post("/login")
+            .send({ email: "invalid", password: "invalid" });
+        expect(response.status).toBe(401);
     });
 
-    // More tests for failed login, logout, protected routes, etc.
-});
-
-describe("Passport Authentication", () => {
-    it("should login successfully with correct credentials", (done) => {
-        chai.request(app)
-            .post("/login") // Your login route
-            .send({
-                email: "arthur.gatignol@gmail.com",
-                password: "administrator",
-            })
-            .end((err, res) => {
-                expect(res).to.have.status(200);
-                expect(res).to.have.cookie("user_sid"); // Replace with your session cookie name
-                done();
-            });
+    it("should return 200 if login is successful", async () => {
+        // TODO: Add test case for successful login
+        const response = await request(app).post("/login").send({
+            email: "arthur.gatignol@efrei.net",
+            password: "administrator",
+        });
+        expect(response.status).toBe(200);
     });
 
-    // More tests for logout, protected routes, etc.
+    // Generate unit test to see if a cookie is generated
+    it("should return a cookie if login is successful", async () => {
+        const response = await request(app).post("/login").send({
+            email: "arthur.gatignol@efrei.net",
+            password: "administrator",
+        });
+        expect(response.headers["Set-Cookie"]).toBeDefined();
+    });
 });
