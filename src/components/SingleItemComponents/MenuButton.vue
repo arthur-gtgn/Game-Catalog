@@ -25,9 +25,10 @@ export default {
 
 <style scoped>
 .button-52 {
-    font-size: "Poppins", sans-serif;
-    font-size: 16px;
-    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+    font-weight: lighter;
+    color: black;
+    font-size: var(--p);
     letter-spacing: 1px;
     padding: 13px 20px 13px;
     outline: 0;

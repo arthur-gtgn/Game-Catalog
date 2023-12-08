@@ -27,11 +27,26 @@ app.use(
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
+        cookie: { maxAge: 1000 * 60 * 60, httpOnly: false },
     })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+function checkAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/login");
+}
+
+function checkNotAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return res.redirect("/");
+    }
+    next();
+}
 
 app.listen(process.env.WEB_PORT, "0.0.0.0", function () {
     console.log("Listenning on " + process.env.WEB_PORT);

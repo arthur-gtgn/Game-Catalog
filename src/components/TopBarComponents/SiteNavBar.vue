@@ -4,10 +4,10 @@
             <MenuButton title="HOME" route="" />
         </li>
         <li>
-            <MenuButton title="WHAT IS THIS?" route="explain" />
+            <MenuButton title="ABOUT" route="explain" />
         </li>
         <li>
-            <MenuButton title="TEAM" route="about" />
+            <MenuButton title="DEVS" route="about" />
         </li>
         <li>
             <MenuButton title="LOGIN" route="login" />
