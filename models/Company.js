@@ -7,35 +7,52 @@ class Company {
     this.nb_employees = nb_employees;
     this.market_value = market_value;
     this.reseller = reseller;
+    this.price = price;
   }
 
-  save() {
+  static saveCompany(company_name, ceo, nb_employees, market_value, reseller) {
     let sql = `
-        INSERT INTO Company(company_name, ceo, nb_employees, market_value, reseller)
-        VALUES(
-            "${this.company_name}",
-            "${this.ceo}",
-            ${this.nb_employees},
-            ${this.market_value},
-            ${this.reseller ? 1 : 0}
-        );`;
+       INSERT INTO Company(company_name, ceo, nb_employees, market_value, reseller)
+       VALUES("${company_name}", "${ceo}", ${nb_employees}, ${market_value}, ${reseller ? 1 : 0});
+    `;
     return db.execute(sql);
+ }
+ static async saveCompanyWithGame(company_name, ceo, nb_employees, market_value, reseller, gameId, price) {
+  try {
+    const result = await this.saveCompany(company_name, ceo, nb_employees, market_value, reseller);
+    const companyId = result[0].insertId;
+    const sql = `
+      INSERT INTO sold_at(game_id, company_id, price)
+      VALUES(${gameId}, ${companyId}, ${price});
+    `;
+    await db.execute(sql);
+    return companyId;
+  } catch (error) {
+    console.error("Erreur lors de l'ajout de la société au jeu", error);
+    throw error;
   }
+}
 
-  static findByID(company_id) {
-    let sql = `SELECT * FROM Company WHERE company_id = ${company_id}`;
+static findByGameID(game_id) {
+  let sql = `
+    SELECT C.*, S.price
+    FROM Company C
+    JOIN sold_at S ON C.company_id = S.company_id
+    WHERE S.game_id = ${game_id};`;
+
+  return db.execute(sql);
+}
+
+static deleteCompanyById(companyId) {
+    let sql = `DELETE sold_at, Company
+    FROM sold_at
+    INNER JOIN Company ON sold_at.company_id = Company.company_id
+    WHERE Company.company_id = ${companyId};`;
     return db.execute(sql);
-  }
+}
 
-  static findByGameID(game_id) {
-    let sql = `
-        SELECT C.*
-        FROM Company C
-        JOIN developed_by D ON C.company_id = D.company_id
-        WHERE D.game_id = ${game_id};`;
 
-    return db.execute(sql);
-  }
+
 }
 
 module.exports = Company;

@@ -9,6 +9,8 @@ import EditGame from "@/components/EditGame.vue";
 import GameDetails from "@/components/GameDetails.vue";
 import Login from "@/components/LoginComponent.vue";
 import Register from "@/components/RegisterComponent.vue";
+import AddCompany from "@/components/AddCompany.vue";
+
 import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -19,6 +21,7 @@ import {
     MdLockopen,
     FaUserEdit,
 } from "oh-vue-icons/icons";
+
 
 addIcons(LaCodepen, SiMaildotru, MdLockopen, FaUserEdit);
 
@@ -41,6 +44,12 @@ const router = createRouter({
             name: "GameDetails",
             component: GameDetails,
         },
+        {
+            path: "/AddCompany/:id",
+            name: "AddCompany",
+            component: AddCompany,
+        },
+        
     ],
 });
 

@@ -21,4 +21,8 @@ router.route("/review/:id")
 router.route("/review/:gameId/:reviewId").delete(reviewController.deleteReview);
 
 router.route("/company/:id").get(companyController.getCompanyByGameID);
+
+router.route("/AddCompany/:gameId").post(companyController.addCompanyToGame);
+
+router.route("/company/:gameId/:companyId").delete(companyController.deleteCompany);
 module.exports = router;
