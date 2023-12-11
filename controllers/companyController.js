@@ -39,3 +39,20 @@ exports.deleteCompany = async (req, res, next) => {
   }
 };
 
+exports.updateCompany =  async (req, res, next) => {
+  try{
+    const companyId  = req.params.companyId;
+    const {company_name, ceo, nb_employees, market_value, reseller, price} = req.body;
+    const [updated_sold_at, updated_company] = await Company.updateComp(company_name, ceo, nb_employees, market_value, reseller, price, companyId);
+    if (updated_company.affectedRows > 0 && updated_sold_at.affectedRows>0) {
+      res.status(200).json({ message: "Company updated successfully" ,});
+    } else {
+
+      res.status(400).json({ message: "Company not found or not updated" });
+    }  
+  } catch (err) {
+      console.error(err);
+      next(err);
+    }
+};
+

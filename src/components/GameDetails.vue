@@ -52,6 +52,7 @@
       <p>Reseller: {{ comp.reseller ? 'Yes' : 'No' }}</p>
       <p>Price: {{ comp.price }}</p>
       <button @click="deleteCompany(comp.company_id)">Delete Company</button>
+      <button @click="redirectCompEdit(comp.company_id)">Modify</button>
     </li>
     </div>
     <div>
@@ -82,6 +83,7 @@
          reseller: false,
          price: null,
       },
+      companyId: null,
         game: {},
         company: {},
         reviews: [],
@@ -177,7 +179,6 @@
 
       axios.delete(`http://localhost:3000/games/company/${gameId}/${companyId}`)
         .then(() => {
-          this.getGameDetails();
           this.getGameDetailswithCompany();
           console.log("Entreprise supprimée avec succès");
         })
@@ -193,6 +194,9 @@
       goToAddCompany() {
       this.$router.push({ name: 'AddCompany' });
     },
+    redirectCompEdit(companyId){
+      this.$router.push({ name: 'EditCompany' , params: { companyId }});
+    }
 
     },
   };
