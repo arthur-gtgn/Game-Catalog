@@ -1,16 +1,13 @@
 const Company = require("../models/Company");
-
+const Game = require("../models/Game");
 exports.getCompanyByGameID = async (req, res, next) => {
   try {
     const gameId = req.params.id; // Suppose que le paramètre contient l'ID du jeu
+    const [gameDetails, _] = await Game.findByID(gameId);
 
-    const [companyDetails, _] = await Company.findByGameID(gameId);
+    const [companyDetails, __] = await Company.findByGameID(gameId);
 
-    if (!companyDetails || companyDetails.length === 0) {
-      return res.status(404).json({ message: "Company not found for the specified game ID" });
-    }
-
-    res.status(200).json({ company: companyDetails });
+    res.status(200).json({game: gameDetails[0], company: companyDetails });
   } catch (err) {
     console.log(err);
     next(err);

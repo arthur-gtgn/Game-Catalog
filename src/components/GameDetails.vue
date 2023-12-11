@@ -133,11 +133,11 @@
         axios.get(`http://localhost:3000/games/review/${gameId}`).then((response) => {
           this.game = response.data.game;
           this.reviews = response.data.reviews;
-          this.company = response.data.company;
         });},
         getGameDetailswithCompany() {
         const gameId = this.$route.params.id;
         axios.get(`http://localhost:3000/games/company/${gameId}`).then((response) => {
+          this.game = response.data.game;
           this.company = response.data.company;
           
         });
@@ -148,6 +148,7 @@
                 .then(() => {
                     // Rechargez les détails du jeu, y compris les avis
                     this.getGameDetails();
+                    this.getGameDetailswithCompany();
 
                     // Réinitialisez le formulaire de revue
                     this.newReview = {
@@ -164,7 +165,8 @@
         const gameId = this.$route.params.id;
         axios.delete(`http://localhost:3000/games/review/${gameId}/${reviewId}`)
             .then(() => {
-                this.getGameDetails();
+              this.getGameDetails();
+              
             })
             .catch((error) => {
                 console.error("Erreur lors de la suppression de la revue", error);
@@ -176,6 +178,7 @@
       axios.delete(`http://localhost:3000/games/company/${gameId}/${companyId}`)
         .then(() => {
           this.getGameDetails();
+          this.getGameDetailswithCompany();
           console.log("Entreprise supprimée avec succès");
         })
         .catch((error) => {
