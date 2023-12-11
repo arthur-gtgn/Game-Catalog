@@ -27,9 +27,8 @@ CREATE TABLE Company (
     company_name VARCHAR(50),
     ceo VARCHAR(50),
     nb_employees INT,
-    market_value DECIMAL(15,2),
+    market_value INT,
     reseller BOOL
-	-- PRIMARY KEY(company_id)
 );
 
 CREATE TABLE Game(
@@ -39,21 +38,10 @@ CREATE TABLE Game(
     release_date DATE,
     age_rating SMALLINT,
     description VARCHAR(500)
-    -- reseller VARCHAR(50) NOT NULL,
-    -- developer VARCHAR(50) NOT NULL,
-    -- PRIMARY KEY(game_id)
-    -- FOREIGN KEY(reseller) REFERENCES sold_at(company_name),
-    -- FOREIGN KEY (developer) REFERENCES developed_by(company_name)
+    
 );
 
-CREATE TABLE developed_by (
 
-    game_id INT,
-    company_id INT,
-    PRIMARY KEY (game_id, company_id),
-    FOREIGN KEY (game_id) REFERENCES Game(game_id),
-    FOREIGN KEY (company_id) REFERENCES Company(company_id)
-);
 
 CREATE TABLE sold_at (
     game_id INT,
@@ -102,7 +90,7 @@ CREATE TABLE Review (
 );
 
 
-DELIMITER //
+/*DELIMITER //
 CREATE TRIGGER trg_developed_by_reseller
 BEFORE INSERT ON developed_by
 FOR EACH ROW
@@ -126,17 +114,17 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Developer companies are not allowed.';
     END IF;*/
 END //
-DELIMITER ;
+DELIMITER ;*/
 
 
 
 INSERT INTO Company ( company_name, ceo, nb_employees, market_value, reseller)
 VALUES
-    ( 'Electronic Arts', 'Andrew Wilson', 9000, 12.45, TRUE),
-    ('Nintendo', 'Shuntaro Furukawa', 6000, 85.20, FALSE),
-    ('Activision Blizzard', 'Bobby Kotick', 8000, 45.70, TRUE),
-    ('Sony Interactive Entertainment', 'Jim Ryan', 14000, 102.89, FALSE),
-    ('Ubisoft', 'Yves Guillemot', 16000, 19.75, TRUE);
+    ( 'Electronic Arts', 'Andrew Wilson', 9000, 12, TRUE),
+    ('Nintendo', 'Shuntaro Furukawa', 6000, 85, FALSE),
+    ('Activision Blizzard', 'Bobby Kotick', 8000, 45, TRUE),
+    ('Sony Interactive Entertainment', 'Jim Ryan', 14000, 102, FALSE),
+    ('Ubisoft', 'Yves Guillemot', 16000, 19, TRUE);
 
 INSERT INTO Game (game_name, category, release_date, age_rating, description)
 VALUES ( 'FIFA 23', 'Sports', '2023-09-15', 3,
@@ -184,13 +172,7 @@ VALUES
     (4, 4, 69.99),
     (5, 5, 49.99);
 
-INSERT INTO developed_by (game_id, company_id)
-VALUES
-    (1, 1), -- Remplacez les valeurs par les véritables ID de jeu et d'entreprise
-    (2, 2),
-    (3, 3),
-    (4, 4),
-    (5, 5);
+
 
 INSERT INTO played_on (game_id, platform_id)
 VALUES
