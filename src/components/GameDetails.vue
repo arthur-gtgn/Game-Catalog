@@ -1,45 +1,72 @@
 <template>
     <div class="game-details">
-      <SiteTopBar />
-      
-      <GameCard
-        :title="game.game_name"
-        :category="game.category"
-        :release_date="game.release_date ? game.release_date.substring(0, 10) : ''"
-        :description="game.description"
-        :rating="game.age_rating"
-        :gameId="game.game_id"
-        @delete-game="deleteGame"
-        @edit-game="editGame"
-      />
-  
-      <h2>Reviews</h2>
-      <ul>
-        <li v-for="review in reviews" :key="review.review_id" class="review-item">
-          <div class="review-content">
-            <p>by {{ review.author }}<br>Grade: {{ review.grade }} /100<br>Review: {{ review.description }}</p>
-            <button @click="deleteReview(review.review_id)">Delete Review</button>
-          </div>
-        </li>
-      </ul>
-      <div class="center">
-      <h3 >Add Review</h3>
-      <form @submit.prevent="submitReview" class="form-review">
-        <div class="form-group">
-        <label for="author">Author:</label>
-        <input v-model="newReview.author" type="text" required><br>
-      </div>
-        <div class="form-group">
-        <label for="grade">Grade:</label>
-        <input v-model="newReview.grade" type="number" min="0" max="100" required>
-        
-      </div><br>
-        <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea v-model="newReview.description" required></textarea>
-      </div>
-        <button class ="submit-review" type="submit">Submit Review</button>
-      </form>
+        <SiteTopBar />
+        <div class="gamecard-container">
+            <GameCard
+                :title="game.game_name"
+                :category="game.category"
+                :release_date="
+                    game.release_date ? game.release_date.substring(0, 10) : ' '
+                "
+                :description="game.description"
+                :rating="game.age_rating"
+                :gameId="game.game_id"
+                @delete-game="deleteGame"
+                @edit-game="editGame"
+                class="gamecard"
+            />
+        </div>
+
+        <h2>Reviews</h2>
+        <ul>
+            <li
+                v-for="review in reviews"
+                :key="review.review_id"
+                class="review-item"
+            >
+                <div class="review-content">
+                    <p>
+                        by {{ review.author }}<br />Grade:
+                        {{ review.grade }} /100<br />Review:
+                        {{ review.description }}
+                    </p>
+                    <button @click="deleteReview(review.review_id)">
+                        Delete Review
+                    </button>
+                </div>
+            </li>
+        </ul>
+        <div class="center">
+            <h3>Add Review</h3>
+            <form @submit.prevent="submitReview" class="form-review">
+                <div class="form-group">
+                    <label for="author">Author:</label>
+                    <input
+                        v-model="newReview.author"
+                        type="text"
+                        required
+                    /><br />
+                </div>
+                <div class="form-group">
+                    <label for="grade">Grade:</label>
+                    <input
+                        v-model="newReview.grade"
+                        type="number"
+                        min="0"
+                        max="100"
+                        required
+                    />
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea
+                        v-model="newReview.description"
+                        required
+                    ></textarea>
+                </div>
+                <button class ="submit-review" type="submit">Submit Review</button>
+            </form>
     </div>
     <div class="company-info">
       
@@ -57,24 +84,24 @@
     </div>
     <div>
     <button @click="goToAddCompany">Add Company</button>
-  </div>
-      <button @click="goBack">Back to Games</button>
+      </div>
+        <button @click="goBack">Back to Games</button>
     </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  import SiteTopBar from "@/components/TopBarComponents/SiteTopBar.vue";
-  import GameCard from "@/components/SingleItemComponents/GameCard.vue";
-  
-  export default {
+</template>
+
+<script>
+import axios from "axios";
+import SiteTopBar from "@/components/TopBarComponents/SiteTopBar.vue";
+import GameCard from "@/components/SingleItemComponents/GameCard.vue";
+
+export default {
     components: {
-      SiteTopBar,
-      GameCard,
+        SiteTopBar,
+        GameCard,
     },
     data() {
       
-      return {
+        return {
         newCompany: {
          company_name: "",
          ceo: "",
@@ -85,18 +112,18 @@
       },
       companyId: null,
         game: {},
+
         company: {},
-        reviews: [],
-        newReview: {
-          description: "",
-          grade: null,
-          author: "",
-          
-        },
-      };
+            reviews: [],
+            newReview: {
+                description: "",
+                grade: null,
+                author: "",
+            },
+        };
     },
     mounted() {
-      this.getGameDetails();
+        this.getGameDetails();
       this.getGameDetailswithCompany();
     },
     methods: {
@@ -130,11 +157,13 @@
             console.error("Error submitting company", error);
          });
    },
-      getGameDetails() {
-        const gameId = this.$route.params.id;
-        axios.get(`http://localhost:3000/games/review/${gameId}`).then((response) => {
-          this.game = response.data.game;
-          this.reviews = response.data.reviews;
+        getGameDetails() {
+            const gameId = this.$route.params.id;
+            axios
+                .get(`http://localhost:3000/games/review/${gameId}`)
+                .then((response) => {
+                    this.game = response.data.game;
+                    this.reviews = response.data.reviews;
         });},
         getGameDetailswithCompany() {
         const gameId = this.$route.params.id;
@@ -142,11 +171,15 @@
           this.game = response.data.game;
           this.company = response.data.company;
           
-        });
-      },
-      submitReview() {
+                });
+        },
+        submitReview() {
             const gameId = this.$route.params.id;
-            axios.post(`http://localhost:3000/games/review/${gameId}`, this.newReview)
+            axios
+                .post(
+                    `http://localhost:3000/games/review/${gameId}`,
+                    this.newReview
+                )
                 .then(() => {
                     // Rechargez les détails du jeu, y compris les avis
                     this.getGameDetails();
@@ -160,20 +193,29 @@
                     };
                 })
                 .catch((error) => {
-                    console.error("Erreur lors de la soumission de la revue", error);
+                    console.error(
+                        "Erreur lors de la soumission de la revue",
+                        error
+                    );
                 });
         },
-      deleteReview(reviewId) {
-        const gameId = this.$route.params.id;
-        axios.delete(`http://localhost:3000/games/review/${gameId}/${reviewId}`)
-            .then(() => {
-              this.getGameDetails();
+        deleteReview(reviewId) {
+            const gameId = this.$route.params.id;
+            axios
+                .delete(
+                    `http://localhost:3000/games/review/${gameId}/${reviewId}`
+                )
+                .then(() => {
+                  this.getGameDetails();
               
-            })
-            .catch((error) => {
-                console.error("Erreur lors de la suppression de la revue", error);
-            });
-      },
+                })
+                .catch((error) => {
+                    console.error(
+                        "Erreur lors de la suppression de la revue",
+                        error
+                    );
+                });
+        },
       deleteCompany(companyId) {
       const gameId = this.$route.params.id;
 
@@ -188,9 +230,9 @@
     },
  
 
-      goBack() {
-        this.$router.push({ path: '/' });
-      },
+        goBack() {
+            this.$router.push({ path: "/" });
+        },
       goToAddCompany() {
       this.$router.push({ name: 'AddCompany' });
     },
@@ -199,26 +241,36 @@
     }
 
     },
-  };
-  </script>
-  
-<style scoped>
+};
+</script>
 
-p,h3,h2 {
+<style scoped>
+p,
+h3,
+.gamecard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.gamecard {
+    max-width: 500px;
+}
+h2 {
     color: var(--text);
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
     text-align: justify;
-    padding: 20px ;
-    
+    padding: 20px;
 }
 .review-item{
-  list-style: none;
-  border: 1px solid #ddd; 
-  border-radius: 10px;
-  width: 30%;
-  margin-bottom: 15px;
-  background-color: rgb(255, 251, 251)000; 
+    list-style: none;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 30%;
+    margin-bottom: 15px;
+    background-color: rgb(255, 251, 251) 000;
 }
 .comp-item{
   list-style: none;
@@ -259,9 +311,10 @@ p,h3,h2 {
     top: 7px;
     left: 7px;
 }
-h2,h3{
-  text-align: center;
-  font-size: 2em;
+h2,
+h3 {
+    text-align: center;
+    font-size: 2em;
 }
 .submit-review{
   font-family: "Poppins", sans-serif;

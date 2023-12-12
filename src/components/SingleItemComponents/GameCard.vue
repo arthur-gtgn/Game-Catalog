@@ -5,10 +5,14 @@
         <p class="description">{{ description }}</p>
         <div class="footer">
             <span class="release-date">{{ release_date }}</span>
-            <span class="rating">PEGI {{ rating }}</span>
             <br />
-            <button @click.prevent="deleteGame" class="delete-button">Delete</button>
-            <button @click.prevent="editGame" class="edit-button">Modify</button>
+            <button @click.prevent="deleteGame" class="delete-button">
+                Delete
+            </button>
+            <button @click.prevent="editGame" class="edit-button">
+                Modify
+            </button>
+            <span class="rating">PEGI {{ rating }}</span>
         </div>
     </div>
 </template>
@@ -37,19 +41,18 @@ export default {
 };
 </script>
 
-
-
 <style scoped>
 .card {
     cursor: pointer;
-    background: #f9f9f9;
+    background: var(--primary);
     position: relative;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 0;
     padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 5px white;
 }
 
+/*
 .card:after {
     content: "";
     border-radius: 0;
@@ -67,6 +70,7 @@ export default {
     top: 10px;
     left: 10px;
 }
+*/
 
 .title {
     text-align: center;
@@ -76,14 +80,18 @@ export default {
 }
 
 .category {
+    font-style: italic;
     text-align: center;
     justify-content: center;
     font-size: 1em;
-    color: #666;
+    color: white;
     margin: 0 0 15px 0;
 }
 
 .description {
+    padding-left: 30px;
+    padding-right: 30px;
+    max-width: 80%;
     font-size: 0.9em;
     margin: 0 0 15px 0;
 }
@@ -91,17 +99,25 @@ export default {
 .footer {
     font-size: 0.8em;
     display: flex;
+    align-content: baseline;
     justify-content: space-between;
 }
 
 .release-date {
     font-weight: bold;
-    color: #333;
+    color: white;
 }
 
 .rating {
     font-weight: bold;
-    color: var(--primary);
+    color: white;
+}
+
+button {
+    background-color: black;
+    color: white;
+    outline: none;
+    border: 3px solid white;
 }
 
 /* Responsive adjustments */
