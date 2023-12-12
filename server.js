@@ -21,7 +21,7 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: false }));
 app.use(flash());
-app.use(cors());
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(
     session({
         name: "user_sid",
@@ -32,8 +32,8 @@ app.use(
     })
 );
 
-app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.initialize());
 
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {

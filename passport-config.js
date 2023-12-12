@@ -42,6 +42,8 @@ function initialize(passport) {
             return done(err);
         }
     });
+
+    passport.authenticate("session");
 }
 
 module.exports = initialize;

@@ -10,7 +10,7 @@
             <MenuButton title="DEVS" route="about" />
         </li>
         <li>
-            <MenuButton title="LOGIN" route="login" />
+            <MenuButton :title="username ? username : 'LOGIN'" route="login" />
         </li>
     </ul>
 </template>
