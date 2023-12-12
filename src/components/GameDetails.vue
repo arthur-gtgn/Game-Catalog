@@ -69,24 +69,24 @@
                     Submit Review
                 </button>
             </form>
-        </div>
-        <div class="company-info">
-            <h2>Company Details</h2>
-            <li v-for="comp in company" :key="comp.comp_id" class="comp-item">
-                <p>Company Name: {{ comp.company_name }}</p>
-                <p>CEO: {{ comp.ceo }}</p>
-                <p>Number of Employees: {{ comp.nb_employees }}</p>
-                <p>Market Value: {{ comp.market_value }}</p>
-                <p>Reseller: {{ comp.reseller ? "Yes" : "No" }}</p>
-                <p>Price: {{ comp.price }}</p>
-                <button @click="deleteCompany(comp.company_id)">
-                    Delete Company
-                </button>
-            </li>
-        </div>
-        <div>
-            <button @click="goToAddCompany">Add Company</button>
-        </div>
+    </div>
+    <div class="company-info">
+      
+      <h2>Company Details</h2>
+      <li v-for="comp in company" :key="comp.comp_id" class="comp-item">
+      <p>Company Name: {{ comp.company_name }}</p>
+      <p>CEO: {{ comp.ceo }}</p>
+      <p>Number of Employees: {{ comp.nb_employees }}</p>
+      <p>Market Value: {{ comp.market_value }}</p>
+      <p>Reseller: {{ comp.reseller ? 'Yes' : 'No' }}</p>
+      <p>Price: {{ comp.price }}</p>
+      <button @click="deleteCompany(comp.company_id)">Delete Company</button>
+      <button @click="redirectCompEdit(comp.company_id)">Modify</button>
+    </li>
+    </div>
+    <div>
+    <button @click="goToAddCompany">Add Company</button>
+      </div>
         <button @click="goBack">Back to Games</button>
     </div>
 </template>
@@ -103,16 +103,18 @@ export default {
     },
     data() {
         return {
-            newCompany: {
-                company_name: "",
-                ceo: "",
-                nb_employees: null,
-                market_value: null,
-                reseller: false,
-                price: null,
-            },
-            game: {},
-            company: {},
+        newCompany: {
+         company_name: "",
+         ceo: "",
+         nb_employees: null,
+         market_value: null,
+         reseller: false,
+         price: null,
+      },
+      companyId: null,
+        game: {},
+
+        company: {},
             reviews: [],
             newReview: {
                 description: "",
@@ -223,29 +225,27 @@ export default {
         deleteCompany(companyId) {
             const gameId = this.$route.params.id;
 
-            axios
-                .delete(
-                    `http://localhost:3000/games/company/${gameId}/${companyId}`
-                )
-                .then(() => {
-                    this.getGameDetails();
-                    this.getGameDetailswithCompany();
-                    console.log("Entreprise supprimée avec succès");
-                })
-                .catch((error) => {
-                    console.error(
-                        "Erreur lors de la suppression de l'entreprise",
-                        error
-                    );
-                });
-        },
+      axios.delete(`http://localhost:3000/games/company/${gameId}/${companyId}`)
+        .then(() => {
+          this.getGameDetailswithCompany();
+          console.log("Entreprise supprimée avec succès");
+        })
+        .catch((error) => {
+          console.error("Erreur lors de la suppression de l'entreprise", error);
+        });
+    },
+ 
 
         goBack() {
             this.$router.push({ path: "/" });
         },
-        goToAddCompany() {
-            this.$router.push({ name: "AddCompany" });
-        },
+      goToAddCompany() {
+      this.$router.push({ name: 'AddCompany' });
+    },
+    redirectCompEdit(companyId){
+      this.$router.push({ name: 'EditCompany' , params: { companyId }});
+    }
+
     },
 };
 </script>

@@ -52,8 +52,24 @@ static deleteCompanyById(companyId) {
     return db.execute(sql);
 }
 
-
-
+static async updateComp(company_name, ceo, nb_employees, market_value, reseller, price, companyId){
+  let sqlprice =`
+      UPDATE sold_at
+      SET price = ${price}
+      WHERE company_id = ${companyId};
+      `;
+  const [updated_sold_at,_] = await db.execute(sqlprice);
+  let sql =`
+      UPDATE Company
+      SET company_name = "${company_name}",
+          ceo = "${ceo}",
+          nb_employees = ${nb_employees},
+          market_value = ${market_value},
+          reseller = ${reseller}
+      WHERE company_id = ${companyId};`;
+  const [updated_company,__] = await db.execute(sql);
+  return [updated_sold_at,updated_company];
+}
 }
 
 module.exports = Company;
