@@ -1,9 +1,10 @@
 const dotenv = require("dotenv");
 dotenv.config();
 
+const cors = require("cors");
+
 const serverStatic = require("serve-static");
 
-const cors = require("cors");
 const express = require("express");
 const session = require("express-session");
 const flash = require("express-flash");
@@ -73,6 +74,15 @@ app.post("/login", (req, res, next) => {
             return res.status(200).json({ message: "Login successful" });
         });
     })(req, res, next);
+});
+
+app.get("/api/user", (req, res) => {
+    try {
+        const { userId, username } = req.user;
+        res.status(200).json({ data: { userId, username } });
+    } catch (e) {
+        res.json({ error: e });
+    }
 });
 
 app.use("/register", require("./routes/registerRoute"));

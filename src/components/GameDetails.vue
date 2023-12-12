@@ -65,25 +65,28 @@
                         required
                     ></textarea>
                 </div>
-                <button class ="submit-review" type="submit">Submit Review</button>
+                <button class="submit-review" type="submit">
+                    Submit Review
+                </button>
             </form>
-    </div>
-    <div class="company-info">
-      
-      <h2>Company Details</h2>
-      <li v-for="comp in company" :key="comp.comp_id" class="comp-item">
-      <p>Company Name: {{ comp.company_name }}</p>
-      <p>CEO: {{ comp.ceo }}</p>
-      <p>Number of Employees: {{ comp.nb_employees }}</p>
-      <p>Market Value: {{ comp.market_value }}</p>
-      <p>Reseller: {{ comp.reseller ? 'Yes' : 'No' }}</p>
-      <p>Price: {{ comp.price }}</p>
-      <button @click="deleteCompany(comp.company_id)">Delete Company</button>
-    </li>
-    </div>
-    <div>
-    <button @click="goToAddCompany">Add Company</button>
-      </div>
+        </div>
+        <div class="company-info">
+            <h2>Company Details</h2>
+            <li v-for="comp in company" :key="comp.comp_id" class="comp-item">
+                <p>Company Name: {{ comp.company_name }}</p>
+                <p>CEO: {{ comp.ceo }}</p>
+                <p>Number of Employees: {{ comp.nb_employees }}</p>
+                <p>Market Value: {{ comp.market_value }}</p>
+                <p>Reseller: {{ comp.reseller ? "Yes" : "No" }}</p>
+                <p>Price: {{ comp.price }}</p>
+                <button @click="deleteCompany(comp.company_id)">
+                    Delete Company
+                </button>
+            </li>
+        </div>
+        <div>
+            <button @click="goToAddCompany">Add Company</button>
+        </div>
         <button @click="goBack">Back to Games</button>
     </div>
 </template>
@@ -99,18 +102,17 @@ export default {
         GameCard,
     },
     data() {
-      
         return {
-        newCompany: {
-         company_name: "",
-         ceo: "",
-         nb_employees: null,
-         market_value: null,
-         reseller: false,
-         price: null,
-      },
+            newCompany: {
+                company_name: "",
+                ceo: "",
+                nb_employees: null,
+                market_value: null,
+                reseller: false,
+                price: null,
+            },
             game: {},
-        company: {},
+            company: {},
             reviews: [],
             newReview: {
                 description: "",
@@ -121,39 +123,43 @@ export default {
     },
     mounted() {
         this.getGameDetails();
-      this.getGameDetailswithCompany();
+        this.getGameDetailswithCompany();
     },
     methods: {
-      submitCompany() {
-      const gameId = this.$route.params.id;
-      console.log("Game ID:", gameId);
+        submitCompany() {
+            const gameId = this.$route.params.id;
+            console.log("Game ID:", gameId);
 
-      axios.post(`http://localhost:3000/games/AddCompany/${gameId}`, this.newCompany)
-      .then((response) => {
-            if (
-              response.data &&
-              response.data.message === "Company added successfully to the game"
-            ) {
-              this.getGameDetailswithCompany();
-              this.getGameDetails();
-              console.log("Entreprise ajoutée avec succès");
-              this.newCompany = {
-                company_name: "",
-                ceo: "",
-                nb_employees: "",
-                market_value: "",
-                reseller: false,
-                price:"",
-              };
-              
-            } else {
-              console.error("Réponse inattendue du serveur");
-            }
-          })
-         .catch((error) => {
-            console.error("Error submitting company", error);
-         });
-   },
+            axios
+                .post(
+                    `http://localhost:3000/games/AddCompany/${gameId}`,
+                    this.newCompany
+                )
+                .then((response) => {
+                    if (
+                        response.data &&
+                        response.data.message ===
+                            "Company added successfully to the game"
+                    ) {
+                        this.getGameDetailswithCompany();
+                        this.getGameDetails();
+                        console.log("Entreprise ajoutée avec succès");
+                        this.newCompany = {
+                            company_name: "",
+                            ceo: "",
+                            nb_employees: "",
+                            market_value: "",
+                            reseller: false,
+                            price: "",
+                        };
+                    } else {
+                        console.error("Réponse inattendue du serveur");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error submitting company", error);
+                });
+        },
         getGameDetails() {
             const gameId = this.$route.params.id;
             axios
@@ -161,13 +167,15 @@ export default {
                 .then((response) => {
                     this.game = response.data.game;
                     this.reviews = response.data.reviews;
-        });},
+                });
+        },
         getGameDetailswithCompany() {
-        const gameId = this.$route.params.id;
-        axios.get(`http://localhost:3000/games/company/${gameId}`).then((response) => {
-          this.game = response.data.game;
-          this.company = response.data.company;
-          
+            const gameId = this.$route.params.id;
+            axios
+                .get(`http://localhost:3000/games/company/${gameId}`)
+                .then((response) => {
+                    this.game = response.data.game;
+                    this.company = response.data.company;
                 });
         },
         submitReview() {
@@ -203,8 +211,7 @@ export default {
                     `http://localhost:3000/games/review/${gameId}/${reviewId}`
                 )
                 .then(() => {
-                  this.getGameDetails();
-              
+                    this.getGameDetails();
                 })
                 .catch((error) => {
                     console.error(
@@ -213,28 +220,32 @@ export default {
                     );
                 });
         },
-      deleteCompany(companyId) {
-      const gameId = this.$route.params.id;
+        deleteCompany(companyId) {
+            const gameId = this.$route.params.id;
 
-      axios.delete(`http://localhost:3000/games/company/${gameId}/${companyId}`)
-        .then(() => {
-          this.getGameDetails();
-          this.getGameDetailswithCompany();
-          console.log("Entreprise supprimée avec succès");
-        })
-        .catch((error) => {
-          console.error("Erreur lors de la suppression de l'entreprise", error);
-        });
-    },
- 
+            axios
+                .delete(
+                    `http://localhost:3000/games/company/${gameId}/${companyId}`
+                )
+                .then(() => {
+                    this.getGameDetails();
+                    this.getGameDetailswithCompany();
+                    console.log("Entreprise supprimée avec succès");
+                })
+                .catch((error) => {
+                    console.error(
+                        "Erreur lors de la suppression de l'entreprise",
+                        error
+                    );
+                });
+        },
 
         goBack() {
             this.$router.push({ path: "/" });
         },
-      goToAddCompany() {
-      this.$router.push({ name: 'AddCompany' });
-    },
-
+        goToAddCompany() {
+            this.$router.push({ name: "AddCompany" });
+        },
     },
 };
 </script>
@@ -259,7 +270,7 @@ h2 {
     text-align: justify;
     padding: 20px;
 }
-.review-item{
+.review-item {
     list-style: none;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -267,16 +278,16 @@ h2 {
     margin-bottom: 15px;
     background-color: rgb(255, 251, 251) 000;
 }
-.comp-item{
-  list-style: none;
-  border: 1px solid #ddd; 
-  border-radius: 10px;
-  
-  margin-bottom: 15px;
-  background-color: rgb(255, 251, 251)000; 
+.comp-item {
+    list-style: none;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+
+    margin-bottom: 15px;
+    background-color: rgb(255, 251, 251) 000;
 }
 .form-review {
-  font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif;
     font-weight: var(--p);
     background-color: white;
     display: flex;
@@ -286,15 +297,14 @@ h2 {
     padding: 20px;
     width: 400px;
     margin: 0 auto;
-    
+
     position: relative;
     padding: 13px 20px 13px;
     border: 1px solid black;
-    
 }
 
-.form-review:after{
-  content: "";
+.form-review:after {
+    content: "";
     background-color: var(--primary);
     width: 100%;
     z-index: -1;
@@ -311,8 +321,8 @@ h3 {
     text-align: center;
     font-size: 2em;
 }
-.submit-review{
-  font-family: "Poppins", sans-serif;
+.submit-review {
+    font-family: "Poppins", sans-serif;
     font-weight: var(--p);
     margin-top: 10px;
     padding: 10px;
@@ -323,6 +333,4 @@ h3 {
     cursor: pointer;
     margin: 10px;
 }
-
-  </style>
-  
+</style>

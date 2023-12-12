@@ -17,6 +17,7 @@ class Company {
     `;
     return db.execute(sql);
  }
+ 
  static async saveCompanyWithGame(company_name, ceo, nb_employees, market_value, reseller, gameId, price) {
   try {
     const result = await this.saveCompany(company_name, ceo, nb_employees, market_value, reseller);

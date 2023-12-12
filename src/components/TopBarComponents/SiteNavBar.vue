@@ -16,12 +16,29 @@
 </template>
 
 <script>
+import axios from "axios";
 import MenuButton from "@/components/SingleItemComponents/MenuButton.vue";
 
 export default {
     name: "TestNavBar",
     components: {
         MenuButton,
+    },
+    data() {
+        return {
+            username: null,
+        };
+    },
+    created() {
+        axios
+            .get("http://localhost:3000/api/user")
+            .then((response) => {
+                console.log(response);
+                this.username = response.data.data.username;
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
     },
 };
 </script>
