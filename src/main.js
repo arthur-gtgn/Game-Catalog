@@ -10,7 +10,7 @@ import GameDetails from "@/components/GameDetails.vue";
 import Login from "@/components/LoginComponent.vue";
 import Register from "@/components/RegisterComponent.vue";
 import AddCompany from "@/components/AddCompany.vue";
-
+import EditCompany from "@/components/EditCompany.vue";
 import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -48,6 +48,11 @@ const router = createRouter({
             path: "/AddCompany/:id",
             name: "AddCompany",
             component: AddCompany,
+        },
+        {
+            path: "/EditCompany/:id/:companyId",
+            name: "EditCompany",
+            component: EditCompany,
         },
         
     ],
