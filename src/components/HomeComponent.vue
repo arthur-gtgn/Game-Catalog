@@ -12,6 +12,7 @@
                         class="game-link"
                     >
                         <GameCard
+                            :role="role"
                             :title="game.game_name"
                             :category="game.category"
                             :release_date="game.release_date.substring(0, 10)"
@@ -25,7 +26,9 @@
                 </li>
             </ul>
             <router-link to="/addGame">
-                <button class="add-button">ADD GAME</button>
+                <button class="add-button" v-if="role === 'ADMIN'">
+                    ADD GAME
+                </button>
             </router-link>
         </div>
     </div>
@@ -44,8 +47,22 @@ export default {
     },
     data() {
         return {
+            role: null,
             games: [],
         };
+    },
+    created() {
+        axios
+            .get("http://localhost:3000/api/user", {
+                withCredentials: true,
+            })
+            .then((response) => {
+                console.log(response);
+                this.role = response.data.data.role;
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
     },
     mounted() {
         this.recupGames();

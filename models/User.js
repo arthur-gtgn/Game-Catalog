@@ -37,6 +37,10 @@ class User {
         return db.execute(sql);
     }
 
+    static getAllUsers() {
+        let sql = `SELECT user_id, user_created, username, email, role FROM Users;`;
+        return db.execute(sql);
+    }
 }
 
 module.exports = User;

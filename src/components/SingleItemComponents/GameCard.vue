@@ -6,10 +6,18 @@
         <div class="footer">
             <span class="release-date">{{ release_date }}</span>
             <br />
-            <button @click.prevent="deleteGame" class="delete-button">
+            <button
+                v-if="role === 'ADMIN'"
+                @click.prevent="deleteGame"
+                class="delete-button"
+            >
                 Delete
             </button>
-            <button @click.prevent="editGame" class="edit-button">
+            <button
+                v-if="role === 'ADMIN'"
+                @click.prevent="editGame"
+                class="edit-button"
+            >
                 Modify
             </button>
             <span class="rating">PEGI {{ rating }}</span>
@@ -21,6 +29,7 @@
 export default {
     name: "GameCard",
     props: {
+        role: String,
         title: String,
         category: String,
         release_date: String,

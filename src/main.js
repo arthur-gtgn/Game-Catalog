@@ -11,6 +11,8 @@ import Login from "@/components/LoginComponent.vue";
 import Register from "@/components/RegisterComponent.vue";
 import AddCompany from "@/components/AddCompany.vue";
 import EditCompany from "@/components/EditCompany.vue";
+import AdminPage from "@/components/AdminPage.vue";
+
 import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -21,7 +23,6 @@ import {
     MdLockopen,
     FaUserEdit,
 } from "oh-vue-icons/icons";
-
 
 addIcons(LaCodepen, SiMaildotru, MdLockopen, FaUserEdit);
 
@@ -54,7 +55,11 @@ const router = createRouter({
             name: "EditCompany",
             component: EditCompany,
         },
-        
+        {
+            path: "/admin",
+            name: "Admin",
+            component: AdminPage,
+        },
     ],
 });
 

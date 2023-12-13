@@ -54,6 +54,7 @@ app.listen(process.env.WEB_PORT, "0.0.0.0", function () {
 });
 
 app.use("/games", require("./routes/gamesRoute"));
+app.use("/users", require("./routes/usersRoute"));
 
 app.post("/login", (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
@@ -78,8 +79,8 @@ app.post("/login", (req, res, next) => {
 
 app.get("/api/user", (req, res) => {
     try {
-        const { user_id, username } = req.user;
-        res.status(200).json({ data: { user_id, username } });
+        const { user_id, username, role } = req.user;
+        res.status(200).json({ data: { user_id, username, role } });
     } catch (e) {
         res.json({ error: e });
     }
