@@ -31,10 +31,15 @@ export default {
     },
     created() {
         axios
-            .get("http://localhost:3000/api/user")
+            .get("http://localhost:3000/api/user", {
+                /* headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                }, */
+                withCredentials: true,
+            })
             .then((response) => {
                 console.log(response);
-                this.username = response.data.data.username;
+                this.username = response.data.data.username.toUpperCase();
             })
             .catch((error) => {
                 console.log(error.message);

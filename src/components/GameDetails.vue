@@ -25,6 +25,7 @@
                     :author="review.author"
                     :grade="review.grade"
                     :reviewID="review.review_id"
+                    class="review-card"
                 />
             </li>
         </ul>
@@ -341,7 +342,9 @@ h3 {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    padding: 0;
+}
+
+.review-card {
+    margin: 0 20px;
 }
 </style>

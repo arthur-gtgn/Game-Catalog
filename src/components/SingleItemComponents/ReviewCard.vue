@@ -39,12 +39,13 @@ export default {
 <style scoped>
 .card {
     cursor: pointer;
-    background: var(--primary);
+    background: white;
     position: relative;
     border: 2px solid black;
     border-radius: 0;
     padding: 15px;
-    box-shadow: 0 0 0 5px white;
+    box-shadow: 0 0 0 5px var(--primary);
+    max-width: 300px;
 }
 
 .author {
@@ -59,7 +60,7 @@ export default {
     text-align: center;
     justify-content: center;
     font-size: 1em;
-    color: white;
+    color: var(--accent);
     margin: 0 0 15px 0;
 }
 
@@ -82,6 +83,7 @@ button {
     background-color: black;
     color: white;
     outline: none;
-    border: 3px solid white;
+    padding: 5px 10px;
+    border: none;
 }
 </style>
