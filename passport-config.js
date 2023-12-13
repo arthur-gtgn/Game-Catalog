@@ -32,9 +32,11 @@ function initialize(passport) {
     );
 
     passport.serializeUser((user, done) => {
+        console.log("*** SERIALIZING");
         done(null, user.user_id);
     });
     passport.deserializeUser(async (id, done) => {
+        console.log("*** DESERIALIZING");
         try {
             const [user, _] = await User.getUserById(id);
             return done(null, user[0]);

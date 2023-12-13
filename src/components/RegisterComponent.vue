@@ -1,6 +1,5 @@
 <template>
     <SiteTopBar />
-    <h1>REGISTER</h1>
     <form @submit.prevent="registerUser" class="register-form">
         <h1>REGISTER FORM</h1>
         <div class="email">
