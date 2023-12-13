@@ -54,7 +54,9 @@ export default {
     methods: {
         submitForm() {
             axios
-                .post("http://localhost:3000/login", this.userData)
+                .post("http://localhost:3000/login", this.userData, {
+                    withCredentials: true,
+                })
                 .then((response) => {
                     if (response.status == 200) {
                         console.log("Login successful");

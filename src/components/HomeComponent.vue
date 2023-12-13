@@ -53,7 +53,7 @@ export default {
     methods: {
         recupGames() {
             axios
-                .get("http://localhost:3000/games")
+                .get("http://localhost:3000/games", { withCredentials: true })
                 .then((response) => {
                     this.games = response.data.games;
                 })

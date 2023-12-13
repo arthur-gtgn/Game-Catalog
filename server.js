@@ -13,15 +13,12 @@ const User = require("./models/User");
 
 const app = express();
 
-const initializePassport = require("./passport-config");
-initializePassport(passport);
-
 app.use(serverStatic(__dirname + "/dist"));
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: false }));
 app.use(flash());
-app.use(cors());
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(
     session({
         name: "user_sid",
@@ -32,8 +29,11 @@ app.use(
     })
 );
 
-app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.initialize());
+const initializePassport = require("./passport-config");
+initializePassport(passport);
+passport.authenticate("session");
 
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
@@ -78,8 +78,8 @@ app.post("/login", (req, res, next) => {
 
 app.get("/api/user", (req, res) => {
     try {
-        const { userId, username } = req.user;
-        res.status(200).json({ data: { userId, username } });
+        const { user_id, username } = req.user;
+        res.status(200).json({ data: { user_id, username } });
     } catch (e) {
         res.json({ error: e });
     }

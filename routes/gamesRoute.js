@@ -33,7 +33,11 @@ router.route("/company/:id").get(companyController.getCompanyByGameID);
 
 router.route("/AddCompany/:gameId").post(companyController.addCompanyToGame);
 
-router.route("/company/:gameId/:companyId").delete(companyController.deleteCompany);
+router
+    .route("/company/:gameId/:companyId")
+    .delete(companyController.deleteCompany);
 
-router.route("/company/update/:id/:companyId").put(companyController.updateCompany);
+router
+    .route("/company/update/:id/:companyId")
+    .put(companyController.updateCompany);
 module.exports = router;
