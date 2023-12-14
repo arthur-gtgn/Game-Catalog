@@ -94,10 +94,12 @@ export default {
                         error
                     );
                 });
+                this.$emit("delete-game", gameId);
         },
         editGame(gameId) {
             console.log(gameId);
             this.$router.push({ name: "EditGame", params: { id: gameId } });
+            this.$emit("edit-game", gameId);
         },
     },
 };
