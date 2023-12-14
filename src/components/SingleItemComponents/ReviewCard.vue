@@ -4,7 +4,6 @@
         <h3 class="grade">{{ grade }}</h3>
         <p class="review">{{ review }}</p>
         <div class="buttons" v-if="role === 'ADMIN'">
-            <button @click="edit">EDIT</button>
             <button @click="deleteReview()">DELETE</button>
         </div>
     </div>

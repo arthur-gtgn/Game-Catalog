@@ -1,7 +1,6 @@
 <template>
-    <div>
-        <SiteTopBar />
-
+    <SiteTopBar />
+    <div class="game-details-main">
         <div class="gamecard-container">
             <GameCard
                 :role="role"
@@ -15,6 +14,7 @@
                 :gameId="game.game_id"
                 @delete-game="deleteGame"
                 @edit-game="editGame"
+                @game-deleted="handleGameDeleted"
                 class="gamecard"
             />
         </div>
@@ -280,6 +280,9 @@ export default {
                 (company) => company.company_id !== companyId
             );
         },
+        handleGameDeleted(gameId) {
+            this.game = this.game.filter((game) => game.game_id !== gameId);
+        },
     },
 };
 </script>
@@ -395,6 +398,7 @@ h2 {
 }
 
 .reviews h2 {
+    text-decoration: underline;
     text-align: center;
 }
 
@@ -425,6 +429,7 @@ h2 {
 }
 
 .companies h2 {
+    text-decoration: underline;
     text-align: center;
 }
 
@@ -443,5 +448,9 @@ button {
     color: white;
     outline: 2px solid white;
     border: none;
+}
+
+.game-details-main {
+    margin-top: 75px;
 }
 </style>

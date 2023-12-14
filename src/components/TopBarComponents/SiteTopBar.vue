@@ -35,7 +35,7 @@ export default {
     left: 0;
     height: 3px;
     width: 0;
-    animation: expands 1s forwards;
+    animation: expands 2s forwards;
 }
 
 @keyframes expands {
@@ -43,7 +43,7 @@ export default {
         width: 0;
     }
     to {
-        width: 300px;
+        width: 100%;
     }
 }
 </style>

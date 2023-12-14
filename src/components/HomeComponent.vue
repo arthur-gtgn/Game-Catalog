@@ -21,6 +21,7 @@
                             :gameId="game.game_id"
                             @delete-game="deleteGame"
                             @edit-game="editGame"
+                            @game-deleted="handleGameDeleted"
                         />
                     </router-link>
                 </li>
@@ -81,23 +82,12 @@ export default {
                     );
                 });
         },
-        deleteGame(gameId) {
-            axios
-                .delete(`http://localhost:3000/games/delete/${gameId}`)
-                .then(() => {
-                    console.log("Jeu supprimé avec succès");
-                    this.recupGames();
-                })
-                .catch((error) => {
-                    console.error(
-                        "Erreur lors de la suppression du jeu",
-                        error
-                    );
-                });
-        },
         editGame(gameId) {
             console.log(gameId);
             this.$router.push({ name: "EditGame", params: { id: gameId } });
+        },
+        handleGameDeleted(gameId) {
+            this.games = this.games.filter((game) => game.game_id !== gameId);
         },
     },
 };
