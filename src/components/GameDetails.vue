@@ -307,6 +307,7 @@ export default {
         },
     },
 };
+// test
 </script>
 
 <style scoped>
@@ -469,4 +470,5 @@ button {
     outline: 2px solid white;
     border: none;
 }
+
 </style>
