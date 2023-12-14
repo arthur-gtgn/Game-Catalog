@@ -1,5 +1,7 @@
 import "./assets/main.css";
 
+import axios from "axios";
+
 import HomeComponent from "@/components/HomeComponent.vue";
 import AboutComponent from "@/components/AboutComponent.vue";
 import App from "./App.vue";
@@ -22,9 +24,20 @@ import {
     SiMaildotru,
     MdLockopen,
     FaUserEdit,
+    RiNumbersFill,
+    BiFileTextFill,
+    BiPersonCircle,
 } from "oh-vue-icons/icons";
 
-addIcons(LaCodepen, SiMaildotru, MdLockopen, FaUserEdit);
+addIcons(
+    LaCodepen,
+    SiMaildotru,
+    MdLockopen,
+    FaUserEdit,
+    RiNumbersFill,
+    BiFileTextFill,
+    BiPersonCircle
+);
 
 const router = createRouter({
     history: createWebHistory(),

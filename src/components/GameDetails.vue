@@ -41,6 +41,44 @@
                 </ul>
             </div>
 
+            <div class="center">
+                <form @submit.prevent="submitReview" class="form-review">
+                    <h2 class="add-review-title">ADD REVIEW</h2>
+                    <div class="form-grade" v-if="role === 'ADMIN'">
+                        <v-icon name="bi-person-circle" />
+                        <input
+                            v-model="newReview.author"
+                            type="text"
+                            required
+                            placeholder="Author"
+                        /><br />
+                    </div>
+                    <div class="form-grade">
+                        <v-icon name="ri-numbers-fill" />
+                        <input
+                            v-model="newReview.grade"
+                            type="number"
+                            min="0"
+                            max="100"
+                            required
+                            placeholder="Grade"
+                        />
+                    </div>
+                    <br />
+                    <div class="form-desc">
+                        <v-icon name="bi-file-text-fill" />
+                        <textarea
+                            v-model="newReview.description"
+                            required
+                            placeholder="Description"
+                        />
+                    </div>
+                    <button class="submit-review" type="submit">
+                        Submit Review
+                    </button>
+                </form>
+            </div>
+
             <div class="companies">
                 <h2>Company</h2>
                 <ul class="company-list">
@@ -62,41 +100,6 @@
             </div>
         </div>
 
-        <div class="center" v-if="role === 'ADMIN'">
-            <h3>Add Review</h3>
-            <form @submit.prevent="submitReview" class="form-review">
-                <div class="form-group">
-                    <label for="author">Author:</label>
-                    <input
-                        v-model="newReview.author"
-                        type="text"
-                        required
-                    /><br />
-                </div>
-                <div class="form-group">
-                    <label for="grade">Grade:</label>
-                    <input
-                        v-model="newReview.grade"
-                        type="number"
-                        min="0"
-                        max="100"
-                        required
-                    />
-                </div>
-                <br />
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea
-                        v-model="newReview.description"
-                        required
-                    ></textarea>
-                </div>
-                <button class="submit-review" type="submit">
-                    Submit Review
-                </button>
-            </form>
-        </div>
-
         <div class="buttons">
             <button
                 class="add-button"
@@ -113,6 +116,7 @@
 
 <script>
 import axios from "axios";
+
 import SiteTopBar from "@/components/TopBarComponents/SiteTopBar.vue";
 import GameCard from "@/components/SingleItemComponents/GameCard.vue";
 import ReviewCard from "./SingleItemComponents/ReviewCard.vue";
@@ -128,6 +132,8 @@ export default {
     data() {
         return {
             role: null,
+            username: null,
+
             newCompany: {
                 company_name: "",
                 ceo: "",
@@ -136,11 +142,15 @@ export default {
                 reseller: false,
                 price: null,
             },
+
             companyId: null,
+
             game: {},
 
             company: {},
+
             reviews: [],
+
             newReview: {
                 description: "",
                 grade: null,
@@ -160,6 +170,12 @@ export default {
             .then((response) => {
                 console.log(response);
                 this.role = response.data.data.role;
+                if (this.role != "ADMIN") {
+                    this.newReview.author = response.data.data.username;
+                    this.username =
+                        response.data.data.username.charAt(0).toUpperCase() +
+                        response.data.data.username.slice(1);
+                }
             })
             .catch((error) => {
                 console.log(error.message);
@@ -234,7 +250,9 @@ export default {
                     this.newReview = {
                         description: "",
                         grade: null,
-                        author: "",
+                        author:
+                            this.username.charAt(0).toUpperCase() +
+                            this.username.slice(1),
                     };
                 })
                 .catch((error) => {
@@ -286,6 +304,11 @@ h2 {
     padding: 20px;
 }
 
+.add-review-title {
+    color: black;
+    font-family: "Poppins", sans-serif;
+    padding: 0px;
+}
 .form-review {
     font-family: "Poppins", sans-serif;
     font-weight: var(--p);
@@ -296,10 +319,9 @@ h2 {
     justify-content: center;
     padding: 20px;
     width: 400px;
-    margin: 0 auto;
+    margin: auto;
 
     position: relative;
-    padding: 13px 20px 13px;
     border: 1px solid black;
 }
 
@@ -316,6 +338,34 @@ h2 {
     top: 7px;
     left: 7px;
 }
+
+.form-review input {
+    width: 250px;
+    margin: 5px;
+    border: none;
+    background: none;
+    position: relative;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
+
+.form-review textarea {
+    font-family: "Arial", sans-serif;
+    width: 250px;
+    border: none;
+    background: none;
+    position: relative;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
+
+.form-desc {
+    display: flex;
+    align-items: center;
+}
+
 .submit-review {
     font-family: "Poppins", sans-serif;
     font-weight: var(--p);
@@ -332,6 +382,8 @@ h2 {
 .details {
     display: flex;
     flex-direction: row;
+    align-items: first baseline;
+    margin-top: 50px;
 }
 
 .reviews {
@@ -351,6 +403,7 @@ h2 {
     justify-content: center;
     list-style: none;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
 }
 
@@ -361,9 +414,10 @@ h2 {
 .company-list {
     list-style: none;
     display: flex;
+    align-items: center;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
 }
 
 .company-list li {

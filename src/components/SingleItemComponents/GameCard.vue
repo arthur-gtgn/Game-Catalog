@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
     name: "GameCard",
     props: {
@@ -39,12 +40,22 @@ export default {
     },
     methods: {
         deleteGame() {
-            const gameId = this.gameId;
-            this.$emit("delete-game", gameId);
+            axios
+                .delete(`http://localhost:3000/games/delete/${this.gameId}`)
+                .then(() => {
+                    console.log("Game deleted successfully");
+                    this.$router.push({ path: "/" });
+                })
+                .catch((error) => {
+                    console.error("Error while deleting game: ", error);
+                });
         },
         editGame() {
-            const gameId = this.gameId;
-            this.$emit("edit-game", gameId);
+            console.log(this.gameId);
+            this.$router.push({
+                name: "EditGame",
+                params: { id: this.gameId },
+            });
         },
     },
 };
