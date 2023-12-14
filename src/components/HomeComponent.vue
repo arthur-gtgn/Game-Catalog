@@ -95,6 +95,9 @@ export default {
                         error
                     );
                 });
+
+            this.$emit("delete-game", gameId);
+
         },
         editGame(gameId) {
             console.log(gameId);
