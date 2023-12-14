@@ -35,7 +35,6 @@
                             :grade="review.grade"
                             :reviewID="review.review_id"
                             class="review-card"
-                            @edit-review="editReview"
                             @review-deleted="handleReviewDeleted"
                         />
                     </li>
@@ -122,14 +121,13 @@ import SiteTopBar from "@/components/TopBarComponents/SiteTopBar.vue";
 import GameCard from "@/components/SingleItemComponents/GameCard.vue";
 import ReviewCard from "./SingleItemComponents/ReviewCard.vue";
 import CompanyCard from "./SingleItemComponents/CompanyCard.vue";
-import HomeComponent from "@/components/HomeComponent.vue";
+
 export default {
     components: {
         SiteTopBar,
         GameCard,
         ReviewCard,
         CompanyCard,
-        HomeComponent,
     },
     data() {
         return {
@@ -182,7 +180,6 @@ export default {
             .catch((error) => {
                 console.log(error.message);
             });
-        
     },
     methods: {
         submitCompany() {
@@ -264,28 +261,6 @@ export default {
                         error
                     );
                 });
-        },
-        deleteGame(gameId) {
-            axios
-                .delete(`http://localhost:3000/games/delete/${gameId}`)
-                .then(() => {
-                    console.log("Jeu supprimé avec succès");
-                    this.$router.push({ path: "/" });
-                })
-                .catch((error) => {
-                    console.error(
-                        "Erreur lors de la suppression du jeu",
-                        error
-                    );
-                });
-        },
-        editGame(gameId) {
-            console.log(gameId);
-            this.$router.push({ name: "EditGame", params: { id: gameId } });
-        },
-        editReview(reviewID){
-            this.$router.push({name: "EditReview", params: { id: reviewID }})
-
         },
 
         goBack() {

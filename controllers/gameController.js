@@ -63,7 +63,18 @@ exports.getGameByID = async (req, res, next) => {
     }
 };
 
-
+/*exports.updateGame = async (req, res, next) => {
+    try {
+        let gameID = req.params.id;
+        let { game_name, category, release_date, age_rating } = req.body;
+        let [game, _] = await Game.findByID(gameID);
+        game.update(game_name, category, release_date, age_rating);
+        res.status(200).json({ game: game[0] });
+    } catch (err) {
+        console.log(err);
+        next(err);
+    }
+};*/
 exports.updateGame = async (req, res, next) => {
     try {
         const gameID = req.params.id;
