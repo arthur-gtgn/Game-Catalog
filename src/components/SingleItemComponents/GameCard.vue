@@ -11,14 +11,14 @@
                 @click.prevent="deleteGame"
                 class="delete-button"
             >
-                Delete
+                DELETE
             </button>
             <button
                 v-if="role === 'ADMIN'"
                 @click.prevent="editGame"
                 class="edit-button"
             >
-                Modify
+                EDIT
             </button>
             <span class="rating">PEGI {{ rating }}</span>
         </div>
@@ -44,6 +44,7 @@ export default {
                 .delete(`http://localhost:3000/games/delete/${this.gameId}`)
                 .then(() => {
                     console.log("Game deleted successfully");
+                    this.$emit("game-deleted", this.gameId);
                     this.$router.push({ path: "/" });
                 })
                 .catch((error) => {
@@ -63,7 +64,6 @@ export default {
 
 <style scoped>
 .card {
-    cursor: pointer;
     background: var(--primary);
     position: relative;
     border: 2px solid black;
@@ -134,10 +134,13 @@ export default {
 }
 
 button {
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
     background-color: black;
+    padding: 5px 10px;
     color: white;
     outline: none;
-    border: 3px solid white;
+    border: 2px solid white;
 }
 
 /* Responsive adjustments */

@@ -8,6 +8,7 @@ exports.getGameWithReviews = async (req, res, next) => {
         const [gameReviews, __] = await Review.getGameReviews(gameId);
 
         res.status(200).json({ game: gameDetails[0], reviews: gameReviews });
+
     } catch (err) {
         console.log(err);
         next(err);
@@ -23,6 +24,7 @@ exports.getReviews = async (req, res, next) => {
         next(err);
     }
 };
+
 exports.addReview = async (req, res, next) => {
     try {
         const { description, grade, author } = req.body;
