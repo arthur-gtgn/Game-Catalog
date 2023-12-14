@@ -100,9 +100,6 @@ export default {
             console.log(gameId);
             this.$router.push({ name: "EditGame", params: { id: gameId } });
         },
-        handleGameDeleted(gameId) {
-            this.games = this.games.filter((game) => game.game_id !== gameId);
-        },
     },
 };
 </script>
