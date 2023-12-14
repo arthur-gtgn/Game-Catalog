@@ -2,8 +2,9 @@
   <div>
     <SiteTopBar />
     <div class="edit-company">
-      <h2>Edit Company</h2>
-      <form @submit.prevent="updateCompany">
+      
+      <form @submit.prevent="updateCompany" class="form-game">
+        <h2 class ="edit-game-title">Edit Company</h2>
         <div class="form-group">
           <label for="company_name">Company Name:</label>
           <input v-model="newCompany.company_name" type="text" required />
@@ -28,7 +29,7 @@
           <label for="price">Price:</label>
           <input v-model="newCompany.price" type="number" step="any"  required />
         </div>
-        <button type="submit">Update Company</button>
+        <button type="submit" class="submit">Update Company</button>
       </form>
     </div>
   </div>
@@ -100,35 +101,103 @@ export default {
   margin: 20px;
 }
 
-form {
-  position: absolute;
-  padding: 20px;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: aliceblue;
-  border-radius: 20px;
+
+.form-game {
+    font-family: "Poppins", sans-serif;
+    font-weight: var(--p);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    width:500px;
+    margin: auto;
+    position: relative;
+    border: 1px solid black;
 }
 
-label {
-  padding: 10px;
-  font-weight: bold;
+  
+.form-game:after {
+    content: "";
+    background-color: var(--primary);
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    transition: 0.2s;
+    top: 7px;
+    left: 7px;
 }
 
-input {
-  width: 90%;
-  padding: 10px;
+.form-game input {
+    width: 250px;
+    margin: 5px;
+    border: none;
+    background: none;
+    position: relative;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 0.5rem;
 }
 
+.form-game textarea {
+    font-family: "Arial", sans-serif;
+    width: 250px;
+    border: none;
+    background: none;
+    position: relative;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
+.update-game {
+    font-family: "Poppins", sans-serif;
+    font-weight: var(--p);
+    margin-top: 10px;
+    padding: 10px;
+    width: 200px;
+    background-color: var(--primary);
+    color: rgb(225, 224, 224);
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+}
+h2 {
+    color: var(--text);
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    text-align: justify;
+    padding: 20px;
+}
+
+.edit-game-title {
+    color: black;
+    font-family: "Poppins", sans-serif;
+    padding: 0px;
+}
 button {
-  background-color: #3498db;
-  color: white;
-  padding: 10px;
-  cursor: pointer;
-  border: none;
+    margin: 20px;
+    font-family: "Poppins", sans-serif;
+    padding: 10px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    outline: 2px solid white;
+    border: none;
 }
-
-button:hover {
-  background-color: #2980b9;
+.submit {
+    font-family: "Poppins", sans-serif;
+    font-weight: var(--p);
+    margin-top: 10px;
+    padding: 10px;
+    width: 200px;
+    background-color: var(--primary);
+    color: rgb(225, 224, 224);
+    border: none;
+    cursor: pointer;
+    margin: 10px;
 }
 </style>

@@ -153,7 +153,16 @@ h2 {
     text-align: justify;
     padding: 20px;
 }
-
+button {
+    margin: 20px;
+    font-family: "Poppins", sans-serif;
+    padding: 10px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    outline: 2px solid white;
+    border: none;
+}
 .edit-review-title {
     color: black;
     font-family: "Poppins", sans-serif;
