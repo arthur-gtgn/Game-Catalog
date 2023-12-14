@@ -80,7 +80,6 @@
             console.log("Game updated successfully", response.data);
             this.isEditing = false;
             this.$router.push({ path: '/' });
-            // Optionally, you can navigate back to the home page or perform other actions
           })
           .catch((error) => {
             console.error("Error updating game", error);

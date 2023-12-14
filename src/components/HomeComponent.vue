@@ -82,9 +82,25 @@ export default {
                     );
                 });
         },
+        deleteGame(gameId) {
+            axios
+                .delete(`http://localhost:3000/games/delete/${gameId}`)
+                .then(() => {
+                    console.log("Jeu supprimé avec succès");
+                    this.recupGames();
+                })
+                .catch((error) => {
+                    console.error(
+                        "Erreur lors de la suppression du jeu",
+                        error
+                    );
+                });
+                this.$emit("delete-game", gameId);
+        },
         editGame(gameId) {
             console.log(gameId);
             this.$router.push({ name: "EditGame", params: { id: gameId } });
+            this.$emit("edit-game", gameId);
         },
         handleGameDeleted(gameId) {
             this.games = this.games.filter((game) => game.game_id !== gameId);

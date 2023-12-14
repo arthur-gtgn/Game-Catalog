@@ -33,6 +33,15 @@ class Company {
     throw error;
   }
 }
+static findCompany(company_id) {
+  let sql = `
+    SELECT C.*, S.price
+    FROM Company C
+    JOIN sold_at S ON C.company_id = S.company_id
+    WHERE S.company_id = ${company_id};`;
+
+  return db.execute(sql);
+}
 
 static findByGameID(game_id) {
   let sql = `

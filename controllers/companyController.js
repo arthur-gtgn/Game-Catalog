@@ -15,9 +15,9 @@ exports.getCompanyByGameID = async (req, res, next) => {
 };
 exports.getCompany = async (req, res, next) => {
     try {
-        const gameId = req.params.id;
+        const companyId = req.params.companyId;
 
-        const [companyDetails, __] = await Company.findByGameID(gameId);
+        const [companyDetails, _] = await Company.findCompany(companyId);
 
         res.status(200).json({ company: companyDetails });
     } catch (err) {
@@ -73,7 +73,7 @@ exports.updateCompany =  async (req, res, next) => {
     const {company_name, ceo, nb_employees, market_value, reseller, price} = req.body;
     const [updated_sold_at, updated_company] = await Company.updateComp(company_name, ceo, nb_employees, market_value, reseller, price, companyId);
     if (updated_company.affectedRows > 0 && updated_sold_at.affectedRows>0) {
-      res.status(200).json({ message: "Company updated successfully" ,});
+      res.status(200).json({ message: "Company updated successfully" });
     } else {
 
       res.status(400).json({ message: "Company not found or not updated" });

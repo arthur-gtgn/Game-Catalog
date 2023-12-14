@@ -20,10 +20,26 @@ class Review {
         let sql = `SELECT * FROM Review WHERE game_id = ${gameId}`;
         return db.execute(sql);
     }
+    static getReview(reviewId) {
+        let sql = `SELECT * FROM Review WHERE review_id = ${reviewId}`;
+        return db.execute(sql);
+    }
     static deleteReviewById(reviewId) {
         let sql = `DELETE FROM Review WHERE review_id = ${reviewId}`;
         return db.execute(sql);
     }
+    static updateReview(description, grade, author, gameId){
+        let sql = `
+            UPDATE Review
+            SET description = "${description}",
+                grade = ${grade},
+                author = "${author}"
+            WHERE game_id = ${gameId};`;
+            
+        return db.execute(sql);
+    }
+
+
 }
 
 module.exports = Review;
