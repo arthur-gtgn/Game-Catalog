@@ -62,7 +62,7 @@ const router = createRouter({
             component: AdminPage,
         },
         {
-            path: "/EditReview/:id",
+            path: "/EditReview/:id/reviewId",
             name: "EditReview",
             component: EditReview,
         },

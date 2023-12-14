@@ -3,7 +3,7 @@
         <h2 class="author">{{ author }}</h2>
         <h3 class="grade">{{ grade }}</h3>
         <p class="review">{{ review }}</p>
-        <div class="buttons" >
+        <div class="buttons" v-if="role === 'ADMIN'">
             <button @click="edit()">EDIT</button>
             <button @click="deleteReview()">DELETE</button>
         </div>

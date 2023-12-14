@@ -41,4 +41,6 @@ router
 router
     .route("/company/update/:id/:companyId")
     .put(companyController.updateCompany);
+
+router.route("/review/fetch/:reviewId").get(reviewController.getReviews);
 module.exports = router;

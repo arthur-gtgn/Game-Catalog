@@ -1,24 +1,25 @@
 <template>
     <SiteTopBar />
     <div class="edit-review">
-      <h2>Edit Review</h2>
-      <form @submit.prevent="updateReview">
-        <div class="form-group">
-          <label for="description">Description:</label>
-          <textarea v-model="editedReview.description" id="description" rows="4" required />
-        </div>
-        <div class="form-group">
-          <label for="grade">Grade:</label>
-          <input v-model="editedReview.grade" type="number" required />
-        </div>
-        <div class="form-group">
-          <label for="author">Author:</label>
-          <input v-model="editedReview.author" type="text" required />
-        </div>
-        <button type="submit">Update Review</button>
-      </form>
+        <h2>Edit Review</h2>
+        <form @submit.prevent="updateReview">
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea v-model="editedReview.description" id="description" rows="4" required />
+            </div>
+            <div class="form-group">
+                <label for="grade">Grade:</label>
+                <input v-model="editedReview.grade" type="number" required />
+            </div>
+            <div class="form-group">
+                <label for="author">Author:</label>
+                <input v-model="editedReview.author" type="text" required />
+            </div>
+            <button type="submit">Update Review</button>
+        </form>
     </div>
-  </template>
+</template>
+
   
   <script>
   import axios from "axios";
@@ -38,24 +39,41 @@
       };
     },
     mounted() {
-      const reviewId = this.$route.params.id;
-    
-    },
-    methods: {
-     
-      updateReview() {
+    const reviewId = this.$route.params.id;
+
+    axios
+        .get(`http://localhost:3000/games/review/fetch/${reviewId}`)
+        .then((response) => {
+            this.editedReview = response.data.reviews[0];
+        })
+        .catch((error) => {
+            console.error("Error fetching review", error);
+        });
+},
+
+methods: {
+    updateReview() {
         const reviewId = this.$route.params.id;
-  
+
+        // Créez un objet avec seulement les champs modifiés
+        const updatedFields = {};
+        for (const key in this.editedReview) {
+            if (this.editedReview[key] !== null && this.editedReview[key] !== undefined) {
+                updatedFields[key] = this.editedReview[key];
+            }
+        }
+
         axios
-          .put(`http://localhost:3000/games/review/update/${reviewId}`, this.editedReview)
-          .then(() => {
-            this.$router.push({ name: "GameDetails" });
-          })
-          .catch((error) => {
-            console.error("Error updating review", error);
-          });
-      },
+            .put(`http://localhost:3000/games/review/update/${reviewId}`, updatedFields)
+            .then(() => {
+                this.$router.push({ name: "GameDetails" });
+            })
+            .catch((error) => {
+                console.error("Error updating review", error);
+            });
     },
+},
+
   };
   </script>
   

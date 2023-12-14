@@ -6,7 +6,7 @@
         <p class="market-value">Market Value: {{ marketValue }}$</p>
         <p class="num-employees">N° of Employees: {{ numEmployees }}</p>
         <p class="reseller-bool">Reseller: {{ reseller ? "Yes" : "No" }}</p>
-        <div class="buttons" >
+        <div class="buttons" v-if="role === 'ADMIN'">
             <button @click="redirectCompEdit()">EDIT</button>
             <button @click="deleteCompany()">DELETE</button>
         </div>

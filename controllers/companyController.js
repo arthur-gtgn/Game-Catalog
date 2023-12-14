@@ -17,7 +17,7 @@ exports.getCompany = async (req, res, next) => {
     try {
         const companyId = req.params.companyId;
 
-        const [companyDetails, __] = await Company.findCompany(companyId);
+        const [companyDetails, _] = await Company.findCompany(companyId);
 
         res.status(200).json({ company: companyDetails });
     } catch (err) {
