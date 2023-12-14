@@ -28,13 +28,13 @@ class Review {
         let sql = `DELETE FROM Review WHERE review_id = ${reviewId}`;
         return db.execute(sql);
     }
-    static updateReview(description, grade, author, gameId){
+    static updateReview(description, grade, author, reviewId){
         let sql = `
             UPDATE Review
             SET description = "${description}",
                 grade = ${grade},
                 author = "${author}"
-            WHERE game_id = ${gameId};`;
+            WHERE review_id = ${reviewId};`;
             
         return db.execute(sql);
     }

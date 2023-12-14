@@ -79,7 +79,7 @@ export default {
       axios
         .put(
           `http://localhost:3000/games/company/update/${gameId}/${companyId}`,
-          this.newCompany
+          updatedFields
         )
         .then(() => {
           this.$router.push({

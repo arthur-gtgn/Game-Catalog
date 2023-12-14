@@ -22,9 +22,15 @@ export default {
         reviewID: Number,
     },
     methods: {
+
         edit() {
-        this.$emit("edit-review", this.reviewID);
-    },
+            this.$router.push({
+                name: "EditReview",
+                params: { reviewId: this.reviewID },
+            });
+            /*const gameId = this.$route.params.id;
+            this.$emit("edit-review", this.reviewID);*/
+        },
         deleteReview() {
             const gameId = this.$route.params.id;
             axios
