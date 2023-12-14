@@ -50,14 +50,14 @@ exports.deleteReview = async (req, res, next) => {
 
 exports.updateReviewGame = async (req, res, next) => {
   try {
-    const reviewId = req.params.reviewId;
+    const gameID = req.params.id;
     const { description, grade, author} =
         req.body;
     const [updatedReview, _] = await Review.updateReview(
       description,
       grade,
       author,
-      reviewId
+      gameID
     );
     if (updatedReview.affectedRows > 0) {
       res.status(200).json({ message: "Review updated successfully" });

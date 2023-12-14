@@ -27,7 +27,7 @@ router
     .get(reviewController.getGameWithReviews)
     .post(reviewController.addReview);
 
-router.route("/review/update/:id/:reviewId").put(reviewController.updateReviewGame);
+router.route("/review/update/:id").put(reviewController.updateReviewGame);
 router.route("/review/:gameId/:reviewId").delete(reviewController.deleteReview);
 
 router.route("/company/:id").get(companyController.getCompanyByGameID);

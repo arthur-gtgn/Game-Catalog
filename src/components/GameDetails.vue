@@ -283,7 +283,7 @@ export default {
             console.log(gameId);
             this.$router.push({ name: "EditGame", params: { id: gameId } });
         },
-        editReview( reviewID){
+        editReview(reviewID){
             this.$router.push({name: "EditReview", params: { id: reviewID }})
 
         },
