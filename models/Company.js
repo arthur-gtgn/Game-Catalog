@@ -33,6 +33,10 @@ class Company {
     throw error;
   }
 }
+static findCompany(company_id){
+  let sql=`SELECT * FROM Company WHERE company_id =${company_id}`
+  return db.execute(sql);
+}
 
 static findByGameID(game_id) {
   let sql = `

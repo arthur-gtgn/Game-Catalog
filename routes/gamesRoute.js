@@ -27,12 +27,13 @@ router
     .get(reviewController.getGameWithReviews)
     .post(reviewController.addReview);
 
+router.route("/review/update/:id").put(reviewController.updateReviewGame);
 router.route("/review/:gameId/:reviewId").delete(reviewController.deleteReview);
 
 router.route("/company/:id").get(companyController.getCompanyByGameID);
 
 router.route("/AddCompany/:gameId").post(companyController.addCompanyToGame);
-
+router.route("/company/fetch/:companyId").get(companyController.getCompany);
 router
     .route("/company/:gameId/:companyId")
     .delete(companyController.deleteCompany);

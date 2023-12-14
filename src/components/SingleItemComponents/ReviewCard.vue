@@ -3,8 +3,8 @@
         <h2 class="author">{{ author }}</h2>
         <h3 class="grade">{{ grade }}</h3>
         <p class="review">{{ review }}</p>
-        <div class="buttons" v-if="role === 'ADMIN'">
-            <button @click="edit">EDIT</button>
+        <div class="buttons" >
+            <button @click="edit()">EDIT</button>
             <button @click="deleteReview()">DELETE</button>
         </div>
     </div>
@@ -22,6 +22,9 @@ export default {
         reviewID: Number,
     },
     methods: {
+        edit() {
+        this.$emit("edit-review", this.reviewID);
+    },
         deleteReview() {
             const gameId = this.$route.params.id;
             axios
