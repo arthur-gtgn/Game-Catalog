@@ -20,6 +20,7 @@ CREATE TABLE Users(
     email VARCHAR(50) UNIQUE,
     role VARCHAR(50),
     password VARCHAR(60)
+
 );
 
 CREATE TABLE Company (
@@ -38,7 +39,7 @@ CREATE TABLE Game(
     release_date DATE,
     age_rating SMALLINT,
     description VARCHAR(500)
-    
+
 );
 
 
@@ -48,8 +49,8 @@ CREATE TABLE sold_at (
     company_id INT,
     price DECIMAL(5,2),
     PRIMARY KEY(game_id, company_id),
-    FOREIGN KEY(game_id) REFERENCES Game(game_id),
-    FOREIGN KEY(company_id) REFERENCES Company(company_id)
+    FOREIGN KEY(game_id) REFERENCES Game(game_id) ON DELETE CASCADE ,
+    FOREIGN KEY(company_id) REFERENCES Company(company_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Platform (
@@ -66,8 +67,8 @@ CREATE TABLE played_on (
     platform_id INT,
     game_id INT,
     PRIMARY KEY(game_id, platform_id),
-    FOREIGN KEY (game_id) REFERENCES Game(game_id),
-    FOREIGN KEY (platform_id) REFERENCES Platform(platform_id)
+    FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE CASCADE,
+    FOREIGN KEY (platform_id) REFERENCES Platform(platform_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Reviewer (
@@ -85,37 +86,9 @@ CREATE TABLE Review (
     grade SMALLINT,
     author VARCHAR(50) NOT NULL,
     game_id INT,
-    FOREIGN KEY (game_id) REFERENCES game(game_id)
+    FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE CASCADE
     -- PRIMARY KEY (review_id)
 );
-
-
-/*DELIMITER //
-CREATE TRIGGER trg_developed_by_reseller
-BEFORE INSERT ON developed_by
-FOR EACH ROW
-BEGIN
-    DECLARE reseller_val BOOLEAN;
-    SELECT reseller INTO reseller_val FROM Company WHERE company_id = NEW.company_id;
-    /*IF reseller_val = TRUE THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Reseller companies are not allowed.';
-    END IF;*/
-END //
-DELIMITER ;
-
-DELIMITER //
-CREATE TRIGGER trg_sold_by_developer
-BEFORE INSERT ON sold_at
-FOR EACH ROW
-BEGIN
-    DECLARE reseller_val BOOLEAN;
-    SELECT reseller INTO reseller_val FROM Company WHERE company_id = NEW.company_id;
-    /*IF reseller_val = FALSE THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Developer companies are not allowed.';
-    END IF;*/
-END //
-DELIMITER ;*/
-
 
 
 INSERT INTO Company ( company_name, ceo, nb_employees, market_value, reseller)
@@ -181,4 +154,3 @@ VALUES
     (3, 1),
     (4, 5),
     (5, 4);
-
