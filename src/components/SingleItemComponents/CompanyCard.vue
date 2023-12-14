@@ -1,11 +1,14 @@
 <template>
     <div class="card">
-        <h2 class="author">{{ author }}</h2>
-        <h3 class="grade">{{ grade }}</h3>
-        <p class="review">{{ review }}</p>
+        <h2 class="name">{{ name }}</h2>
+        <h3 class="price">Game Price: {{ price }}$</h3>
+        <p class="ceo">CEO: {{ ceo }}</p>
+        <p class="market-value">Market Value: {{ marketValue }}$</p>
+        <p class="num-employees">N° of Employees: {{ numEmployees }}</p>
+        <p class="reseller-bool">Reseller: {{ reseller ? "Yes" : "No" }}</p>
         <div class="buttons" v-if="role === 'ADMIN'">
-            <button @click="edit">EDIT</button>
-            <button @click="deleteReview()">DELETE</button>
+            <button @click="deleteCompany()">DELETE</button>
+            <button @click="redirectCompEdit()">EDIT</button>
         </div>
     </div>
 </template>
@@ -13,31 +16,37 @@
 <script>
 import axios from "axios";
 export default {
-    name: "ReviewCard",
+    name: "CompanyCard",
     props: {
         role: String,
-        review: String,
-        author: String,
-        grade: Number,
-        reviewID: Number,
+        id: Number,
+        name: String,
+        ceo: String,
+        marketValue: Number,
+        numEmployees: Number,
+        reseller: Boolean,
+        price: Number,
     },
     methods: {
-        deleteReview() {
+        deleteCompany(companyId) {
             const gameId = this.$route.params.id;
+            const id = this.id;
+
             axios
-                .delete(
-                    `http://localhost:3000/games/review/${gameId}/${this.reviewID}`
-                )
+                .delete(`http://localhost:3000/games/company/${gameId}/${id}`)
                 .then(() => {
-                    console.log("Review deleted successfully");
-                    this.$emit("review-deleted", this.reviewID);
+                    console.log("Company deleted successfully");
+                    this.$emit("company-deleted", this.id);
                 })
                 .catch((error) => {
-                    console.error(
-                        "Erreur lors de la suppression de la revue",
-                        error
-                    );
+                    console.error("Error while deleting company: ", error);
                 });
+        },
+        redirectCompEdit() {
+            this.$router.push({
+                name: "EditCompany",
+                params: { companyId: this.id },
+            });
         },
     },
 };
@@ -54,14 +63,14 @@ export default {
     max-width: 300px;
 }
 
-.author {
+.name {
     text-align: center;
     font-size: 1.2em;
     margin: 0 0 10px 0;
     justify-content: center;
 }
 
-.grade {
+.price {
     font-style: italic;
     text-align: center;
     justify-content: center;
@@ -70,7 +79,7 @@ export default {
     margin: 0 0 15px 0;
 }
 
-.review {
+p {
     text-align: center;
     justify-content: center;
     padding-left: 30px;

@@ -89,7 +89,7 @@ export default {
                     console.error("Error submitting company", error);
                 });
         },
-        getGameDetailswithCompany() {
+        getGameDetailsWithCompany() {
             const gameId = this.$route.params.id;
             axios
                 .get(`http://localhost:3000/games/company/${gameId}`, {

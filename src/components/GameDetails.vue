@@ -1,8 +1,10 @@
 <template>
-    <div class="game-details">
+    <div>
         <SiteTopBar />
+
         <div class="gamecard-container">
             <GameCard
+                :role="role"
                 :title="game.game_name"
                 :category="game.category"
                 :release_date="
@@ -17,19 +19,50 @@
             />
         </div>
 
-        <h2>Reviews</h2>
-        <ul class="card-list">
-            <li v-for="review in reviews" :key="review.review_id" class="card">
-                <ReviewCard
-                    :review="review.description"
-                    :author="review.author"
-                    :grade="review.grade"
-                    :reviewID="review.review_id"
-                    class="review-card"
-                />
-            </li>
-        </ul>
-        <div class="center">
+        <div class="details">
+            <div class="reviews">
+                <h2>Reviews</h2>
+                <ul class="review-list">
+                    <li
+                        v-for="review in reviews"
+                        :key="review.review_id"
+                        class="card"
+                    >
+                        <ReviewCard
+                            :role="role"
+                            :review="review.description"
+                            :author="review.author"
+                            :grade="review.grade"
+                            :reviewID="review.review_id"
+                            class="review-card"
+                            @review-deleted="handleReviewDeleted"
+                        />
+                    </li>
+                </ul>
+            </div>
+
+            <div class="companies">
+                <h2>Company</h2>
+                <ul class="company-list">
+                    <li v-for="comp in company" :key="comp.comp_id">
+                        <CompanyCard
+                            :role="role"
+                            :id="comp.company_id"
+                            :name="comp.company_name"
+                            :ceo="comp.ceo"
+                            :marketValue="comp.market_value"
+                            :numEmployees="comp.nb_employees"
+                            :reseller="comp.reseller"
+                            :price="comp.price"
+                            @company-deleted="handleCompanyDeleted"
+                            class="company-card"
+                        />
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="center" v-if="role === 'ADMIN'">
             <h3>Add Review</h3>
             <form @submit.prevent="submitReview" class="form-review">
                 <div class="form-group">
@@ -63,27 +96,16 @@
                 </button>
             </form>
         </div>
-        <div class="company-info">
-            <h2>Company Details</h2>
-            <li v-for="comp in company" :key="comp.comp_id" class="comp-item">
-                <p>Company Name: {{ comp.company_name }}</p>
-                <p>CEO: {{ comp.ceo }}</p>
-                <p>Number of Employees: {{ comp.nb_employees }}</p>
-                <p>Market Value: {{ comp.market_value }}</p>
-                <p>Reseller: {{ comp.reseller ? "Yes" : "No" }}</p>
-                <p>Price: {{ comp.price }}</p>
-                <button @click="deleteCompany(comp.company_id)">
-                    Delete Company
-                </button>
-                <button @click="redirectCompEdit(comp.company_id)">
-                    Modify
-                </button>
-            </li>
-        </div>
-        <div>
-            <button @click="goToAddCompany">Add Company</button>
-        </div>
-        <button @click="goBack">Back to Games</button>
+
+        <button
+            class="add-button"
+            @click="goToAddCompany"
+            v-if="role === 'ADMIN'"
+        >
+            Add Company
+        </button>
+
+        <button class="back-button" @click="goBack">Back to Games</button>
     </div>
 </template>
 
@@ -92,15 +114,18 @@ import axios from "axios";
 import SiteTopBar from "@/components/TopBarComponents/SiteTopBar.vue";
 import GameCard from "@/components/SingleItemComponents/GameCard.vue";
 import ReviewCard from "./SingleItemComponents/ReviewCard.vue";
+import CompanyCard from "./SingleItemComponents/CompanyCard.vue";
 
 export default {
     components: {
         SiteTopBar,
         GameCard,
         ReviewCard,
+        CompanyCard,
     },
     data() {
         return {
+            role: null,
             newCompany: {
                 company_name: "",
                 ceo: "",
@@ -123,7 +148,20 @@ export default {
     },
     mounted() {
         this.getGameDetails();
-        this.getGameDetailswithCompany();
+        this.getGameDetailsWithCompany();
+    },
+    created() {
+        axios
+            .get("http://localhost:3000/api/user", {
+                withCredentials: true,
+            })
+            .then((response) => {
+                console.log(response);
+                this.role = response.data.data.role;
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
     },
     methods: {
         submitCompany() {
@@ -141,7 +179,7 @@ export default {
                         response.data.message ===
                             "Company added successfully to the game"
                     ) {
-                        this.getGameDetailswithCompany();
+                        this.getGameDetailsWithCompany();
                         this.getGameDetails();
                         console.log("Entreprise ajoutée avec succès");
                         this.newCompany = {
@@ -169,7 +207,7 @@ export default {
                     this.reviews = response.data.reviews;
                 });
         },
-        getGameDetailswithCompany() {
+        getGameDetailsWithCompany() {
             const gameId = this.$route.params.id;
             axios
                 .get(`http://localhost:3000/games/company/${gameId}`)
@@ -188,7 +226,7 @@ export default {
                 .then(() => {
                     // Rechargez les détails du jeu, y compris les avis
                     this.getGameDetails();
-                    this.getGameDetailswithCompany();
+                    this.getGameDetailsWithCompany();
 
                     // Réinitialisez le formulaire de revue
                     this.newReview = {
@@ -204,40 +242,6 @@ export default {
                     );
                 });
         },
-        deleteReview(reviewId) {
-            const gameId = this.$route.params.id;
-            axios
-                .delete(
-                    `http://localhost:3000/games/review/${gameId}/${reviewId}`
-                )
-                .then(() => {
-                    this.getGameDetails();
-                })
-                .catch((error) => {
-                    console.error(
-                        "Erreur lors de la suppression de la revue",
-                        error
-                    );
-                });
-        },
-        deleteCompany(companyId) {
-            const gameId = this.$route.params.id;
-
-            axios
-                .delete(
-                    `http://localhost:3000/games/company/${gameId}/${companyId}`
-                )
-                .then(() => {
-                    this.getGameDetailswithCompany();
-                    console.log("Entreprise supprimée avec succès");
-                })
-                .catch((error) => {
-                    console.error(
-                        "Erreur lors de la suppression de l'entreprise",
-                        error
-                    );
-                });
-        },
 
         goBack() {
             this.$router.push({ path: "/" });
@@ -245,16 +249,22 @@ export default {
         goToAddCompany() {
             this.$router.push({ name: "AddCompany" });
         },
-        redirectCompEdit(companyId) {
-            this.$router.push({ name: "EditCompany", params: { companyId } });
+
+        handleReviewDeleted(reviewID) {
+            this.reviews = this.reviews.filter(
+                (review) => review.review_id !== reviewID
+            );
+        },
+        handleCompanyDeleted(companyId) {
+            this.company = this.company.filter(
+                (company) => company.company_id !== companyId
+            );
         },
     },
 };
 </script>
 
 <style scoped>
-p,
-h3,
 .gamecard-container {
     display: flex;
     flex-direction: column;
@@ -265,6 +275,7 @@ h3,
 .gamecard {
     max-width: 500px;
 }
+
 h2 {
     color: var(--text);
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
@@ -272,22 +283,7 @@ h2 {
     text-align: justify;
     padding: 20px;
 }
-.review-item {
-    list-style: none;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    width: 30%;
-    margin-bottom: 15px;
-    background-color: rgb(255, 251, 251) 000;
-}
-.comp-item {
-    list-style: none;
-    border: 1px solid #ddd;
-    border-radius: 10px;
 
-    margin-bottom: 15px;
-    background-color: rgb(255, 251, 251) 000;
-}
 .form-review {
     font-family: "Poppins", sans-serif;
     font-weight: var(--p);
@@ -318,11 +314,6 @@ h2 {
     top: 7px;
     left: 7px;
 }
-h2,
-h3 {
-    text-align: center;
-    font-size: 2em;
-}
 .submit-review {
     font-family: "Poppins", sans-serif;
     font-weight: var(--p);
@@ -336,7 +327,36 @@ h3 {
     margin: 10px;
 }
 
-.card-list {
+.details {
+    display: flex;
+    flex-direction: row;
+}
+
+.reviews {
+    width: 50%;
+}
+
+.companies {
+    width: 50%;
+}
+
+.reviews h2 {
+    text-align: center;
+}
+
+.review-list {
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.review-list li {
+    margin: 10px;
+}
+
+.company-list {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -344,7 +364,11 @@ h3 {
     align-items: center;
 }
 
-.review-card {
-    margin: 0 20px;
+.company-list li {
+    margin: 10px;
+}
+
+.companies h2 {
+    text-align: center;
 }
 </style>
