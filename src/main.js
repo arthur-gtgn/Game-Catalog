@@ -14,7 +14,6 @@ import Register from "@/components/RegisterComponent.vue";
 import AddCompany from "@/components/AddCompany.vue";
 import EditCompany from "@/components/EditCompany.vue";
 import AdminPage from "@/components/AdminPage.vue";
-import EditReview from "@/components/EditReview.vue";
 
 import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
@@ -73,11 +72,6 @@ const router = createRouter({
             path: "/admin",
             name: "Admin",
             component: AdminPage,
-        },
-        {
-            path: "/EditReview/:id/reviewId",
-            name: "EditReview",
-            component: EditReview,
         },
     ],
 });

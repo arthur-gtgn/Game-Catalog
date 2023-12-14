@@ -1,7 +1,6 @@
 <template>
-    <div>
-        <SiteTopBar />
-
+    <SiteTopBar />
+    <div class="game-details-main">
         <div class="gamecard-container">
             <GameCard
                 :role="role"
@@ -15,6 +14,7 @@
                 :gameId="game.game_id"
                 @delete-game="deleteGame"
                 @edit-game="editGame"
+                @game-deleted="handleGameDeleted"
                 class="gamecard"
             />
         </div>
@@ -35,7 +35,6 @@
                             :grade="review.grade"
                             :reviewID="review.review_id"
                             class="review-card"
-                            @edit-review="editReview"
                             @review-deleted="handleReviewDeleted"
                         />
                     </li>
@@ -122,14 +121,13 @@ import SiteTopBar from "@/components/TopBarComponents/SiteTopBar.vue";
 import GameCard from "@/components/SingleItemComponents/GameCard.vue";
 import ReviewCard from "./SingleItemComponents/ReviewCard.vue";
 import CompanyCard from "./SingleItemComponents/CompanyCard.vue";
-import HomeComponent from "@/components/HomeComponent.vue";
+
 export default {
     components: {
         SiteTopBar,
         GameCard,
         ReviewCard,
         CompanyCard,
-        HomeComponent,
     },
     data() {
         return {
@@ -182,7 +180,6 @@ export default {
             .catch((error) => {
                 console.log(error.message);
             });
-        
     },
     methods: {
         submitCompany() {
@@ -265,28 +262,6 @@ export default {
                     );
                 });
         },
-        deleteGame(gameId) {
-            axios
-                .delete(`http://localhost:3000/games/delete/${gameId}`)
-                .then(() => {
-                    console.log("Jeu supprimé avec succès");
-                    this.$router.push({ path: "/" });
-                })
-                .catch((error) => {
-                    console.error(
-                        "Erreur lors de la suppression du jeu",
-                        error
-                    );
-                });
-        },
-        editGame(gameId) {
-            console.log(gameId);
-            this.$router.push({ name: "EditGame", params: { id: gameId } });
-        },
-        editReview(reviewID){
-            this.$router.push({name: "EditReview", params: { id: reviewID }})
-
-        },
 
         goBack() {
             this.$router.push({ path: "/" });
@@ -304,6 +279,9 @@ export default {
             this.company = this.company.filter(
                 (company) => company.company_id !== companyId
             );
+        },
+        handleGameDeleted(gameId) {
+            this.game = this.game.filter((game) => game.game_id !== gameId);
         },
     },
 };
@@ -421,6 +399,7 @@ h2 {
 }
 
 .reviews h2 {
+    text-decoration: underline;
     text-align: center;
 }
 
@@ -451,6 +430,7 @@ h2 {
 }
 
 .companies h2 {
+    text-decoration: underline;
     text-align: center;
 }
 
@@ -470,5 +450,4 @@ button {
     outline: 2px solid white;
     border: none;
 }
-
 </style>
