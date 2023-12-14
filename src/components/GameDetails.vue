@@ -245,17 +245,16 @@ export default {
                     this.newReview
                 )
                 .then(() => {
-                    // Rechargez les détails du jeu, y compris les avis
+                    
                     this.getGameDetails();
                     this.getGameDetailsWithCompany();
 
-                    // Réinitialisez le formulaire de revue
+                    
                     this.newReview = {
                         description: "",
                         grade: null,
                         author:
-                            this.username.charAt(0).toUpperCase() +
-                            this.username.slice(1),
+                            ""
                     };
                 })
                 .catch((error) => {

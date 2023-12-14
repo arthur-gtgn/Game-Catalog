@@ -1,7 +1,7 @@
 <template>
     <div class="card">
-        <h2 class="author">{{ author }}</h2>
-        <h3 class="grade">{{ grade }}</h3>
+        <h2 class="author"> {{ author }}</h2>
+        <h3 class="grade">Grade: {{ grade }}/100</h3>
         <p class="review">{{ review }}</p>
         <div class="buttons" v-if="role === 'ADMIN'">
             <button @click="edit()">EDIT</button>
