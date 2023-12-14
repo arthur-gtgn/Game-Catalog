@@ -97,15 +97,17 @@
             </form>
         </div>
 
-        <button
-            class="add-button"
-            @click="goToAddCompany"
-            v-if="role === 'ADMIN'"
-        >
-            Add Company
-        </button>
+        <div class="buttons">
+            <button
+                class="add-button"
+                @click="goToAddCompany"
+                v-if="role === 'ADMIN'"
+            >
+                ADD COMPANY
+            </button>
 
-        <button class="back-button" @click="goBack">Back to Games</button>
+            <button class="back-button" @click="goBack">BACK TO GAMES</button>
+        </div>
     </div>
 </template>
 
@@ -370,5 +372,22 @@ h2 {
 
 .companies h2 {
     text-align: center;
+}
+
+.buttons {
+    justify-content: center;
+    display: flex;
+    margin: 20px;
+}
+
+button {
+    margin: 20px;
+    font-family: "Poppins", sans-serif;
+    padding: 10px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    outline: 2px solid white;
+    border: none;
 }
 </style>
