@@ -15,11 +15,12 @@ class Review {
         `;
         return db.execute(sql);
     }
-
+// Static method to get all reviews for a specific game from the database
     static getGameReviews(gameId) {
         let sql = `SELECT * FROM Review WHERE game_id = ${gameId}`;
         return db.execute(sql);
     }
+    // Static method to get a review by its ID from the database
     static getReview(reviewId) {
         let sql = `SELECT * FROM Review WHERE review_id = ${reviewId}`;
         return db.execute(sql);

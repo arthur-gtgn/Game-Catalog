@@ -6,6 +6,7 @@
         <div class="footer">
             <span class="release-date">{{ release_date }}</span>
             <br />
+            <!-- Delete button visible only for ADMIN role -->
             <button
                 v-if="role === 'ADMIN'"
                 @click.prevent="deleteGame"

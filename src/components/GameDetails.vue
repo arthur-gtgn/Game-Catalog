@@ -3,6 +3,7 @@
         <SiteTopBar />
 
         <div class="gamecard-container">
+            <!-- Pass game details as props to GameCard component -->
             <GameCard
                 :role="role"
                 :title="game.game_name"

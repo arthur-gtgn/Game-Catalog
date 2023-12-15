@@ -1,5 +1,6 @@
 const Review = require("../models/Review");
 const Game = require("../models/Game");
+// Controller function to get a game with its reviews
 exports.getGameWithReviews = async (req, res, next) => {
     try {
       const gameId = req.params.id;
@@ -13,6 +14,7 @@ exports.getGameWithReviews = async (req, res, next) => {
       next(err);
     }
   };
+  // Controller function to get reviews by ID
   exports.getReviews = async (req, res, next) => {
     try {
       const reviewId = req.params.reviewId;
@@ -23,6 +25,7 @@ exports.getGameWithReviews = async (req, res, next) => {
       next(err);
     }
   };
+  // Controller function to add a review to a game
   exports.addReview = async (req, res, next) => {
     try {
         const { description, grade, author } = req.body;

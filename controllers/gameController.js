@@ -1,16 +1,16 @@
 const Game = require("../models/Game");
 
-// Fonction pour formater la date
+// Function to format the date
 const formatDate = (dateString) => {
     const options = { year: "numeric", month: "numeric", day: "numeric" };
     return new Date(dateString).toLocaleDateString("en-US", options);
 };
-
+// Controller function to get all games
 exports.getAllGames = async (req, res, next) => {
     try {
         const [games, _] = await Game.findAll();
 
-        // Formater la date pour chaque jeu dans la liste
+        // Formatting the release date for each game in the list
         const formattedGames = games.map((game) => ({
             ...game,
             release_date: formatDate(game.release_date),
@@ -26,7 +26,7 @@ exports.getAllGames = async (req, res, next) => {
         next(err);
     }
 };
-
+// Controller function to create a new game
 exports.createGame = async (req, res, next) => {
     try {
         let { game_name, category, release_date, age_rating, description } =
@@ -41,7 +41,7 @@ exports.createGame = async (req, res, next) => {
             age_rating,
             description
         );
-
+// Saving the new game to the database
         await game.save();
         res.status(201).json({ message: "Game created", game: game[0] });
     } catch (error) {
@@ -49,7 +49,7 @@ exports.createGame = async (req, res, next) => {
         next(error);
     }
 };
-
+// Controller function to get a game by ID
 exports.getGameByID = async (req, res, next) => {
     try {
         let gameID = req.params.id;
@@ -63,7 +63,7 @@ exports.getGameByID = async (req, res, next) => {
     }
 };
 
-
+// Controller function to update a game by ID
 exports.updateGame = async (req, res, next) => {
     try {
         const gameID = req.params.id;

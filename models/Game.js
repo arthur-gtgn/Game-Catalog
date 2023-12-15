@@ -1,6 +1,7 @@
 const db = require("../config/db");
-
+// Game class representing the model for game-related operations
 class Game {
+     // Constructor to initialize game properties
     constructor(game_name, category, release_date, age_rating, description) {
         this.game_name = game_name;
         this.category = category;
@@ -8,7 +9,7 @@ class Game {
         this.age_rating = age_rating;
         this.description = description;
     }
-
+ // Method to save a new game to the database
     save() {
         let sql = `
         INSERT INTO Game(game_name, category, release_date, age_rating, description)
@@ -20,22 +21,19 @@ class Game {
             "${this.description}");`;
         return db.execute(sql);
     }
-
+ // Static method to retrieve all games from the database
     static findAll() {
         let sql = "SELECT * FROM Game";
         return db.execute(sql);
     }
-
+ // Static method to find a game by its ID in the database
     static findByID(game_id) {
         let sql = `SELECT * FROM Game WHERE game_id = ${game_id}`;
 
         return db.execute(sql);
     }
 
-    /*update(n_game_name, n_category, n_release_date, n_age_rating, game_id) {
-        let sql = `ALTER TABLE Game UPDATE game_name = "${n_game_name}", category = "${n_category}", release_date = "${n_release_date}", age_rating = ${n_age_rating} WHERE game_id = ${game_id};`;
-        return db.execute(sql);
-    }*/
+// Static method to update a game's details in the database
     static update(
         game_name,
         category,
@@ -61,5 +59,5 @@ class Game {
         return db.execute(sql);
     }
 }
-
+// Exporting the Game class to make it accessible in other modules
 module.exports = Game;

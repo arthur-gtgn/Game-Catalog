@@ -17,7 +17,7 @@ class Company {
     `;
     return db.execute(sql);
  }
- 
+ // Static method to save a new company associated with a price from sold_at to the database
  static async saveCompanyWithGame(company_name, ceo, nb_employees, market_value, reseller, gameId, price) {
   try {
     const result = await this.saveCompany(company_name, ceo, nb_employees, market_value, reseller);
@@ -33,6 +33,7 @@ class Company {
     throw error;
   }
 }
+// Static method to find a company by its ID with associated price
 static findCompany(company_id) {
   let sql = `
     SELECT C.*, S.price
@@ -42,7 +43,7 @@ static findCompany(company_id) {
 
   return db.execute(sql);
 }
-
+// Static method to find a company by its associated game ID with price
 static findByGameID(game_id) {
   let sql = `
     SELECT C.*, S.price

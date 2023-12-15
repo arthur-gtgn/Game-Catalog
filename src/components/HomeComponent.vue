@@ -3,6 +3,7 @@
         <SiteTopBar />
         <div class="list">
             <ul>
+                <!-- Loop through the games and display each as a GameCard -->
                 <li v-for="game in games" :key="game.game_id">
                     <router-link
                         :to="{
@@ -68,6 +69,7 @@ export default {
         this.recupGames();
     },
     methods: {
+        // Method to fetch games from the server
         recupGames() {
             axios
                 .get("http://localhost:3000/games", { withCredentials: true })

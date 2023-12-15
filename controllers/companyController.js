@@ -1,8 +1,9 @@
 const Company = require("../models/Company");
 const Game = require("../models/Game");
-
+// Controller function to get company details by game ID
 exports.getCompanyByGameID = async (req, res, next) => {
   try {
+    // Retrieving game and company details using model functions
         const gameId = req.params.id; 
         const [gameDetails, _] = await Game.findByID(gameId);
         const [companyDetails, __] = await Company.findByGameID(gameId);
@@ -13,6 +14,7 @@ exports.getCompanyByGameID = async (req, res, next) => {
         next(err);
     }
 };
+// Controller function to get company details by company ID
 exports.getCompany = async (req, res, next) => {
     try {
         const companyId = req.params.companyId;
@@ -25,6 +27,7 @@ exports.getCompany = async (req, res, next) => {
         next(err);
     }
 };
+// Controller function to add a company to a game
 exports.addCompanyToGame = async (req, res, next) => {
     try {
         const {
@@ -36,7 +39,7 @@ exports.addCompanyToGame = async (req, res, next) => {
             price,
         } = req.body;
         const gameId = req.params.gameId;
-
+ // Calling the model function to save the company with the associated game
         await Company.saveCompanyWithGame(
             company_name,
             ceo,
@@ -55,6 +58,7 @@ exports.addCompanyToGame = async (req, res, next) => {
         next(err);
     }
 };
+// Controller function to delete a company and its associated entries by game and company ID
 exports.deleteCompany = async (req, res, next) => {
     try {
         const { gameId, companyId } = req.params;
@@ -66,7 +70,7 @@ exports.deleteCompany = async (req, res, next) => {
     next(err);
   }
 };
-
+// Controller function to update a company by ID
 exports.updateCompany =  async (req, res, next) => {
   try{
     const companyId  = req.params.companyId;
