@@ -9,7 +9,7 @@
             <!-- Delete button visible only for ADMIN role -->
             <button
                 v-if="role === 'ADMIN'"
-                @click.prevent="deleteGame"
+                @click="deleteGame()"
                 class="delete-button"
             >
                 Delete
@@ -45,6 +45,7 @@ export default {
                 .delete(`http://localhost:3000/games/delete/${this.gameId}`)
                 .then(() => {
                     console.log("Game deleted successfully");
+                    this.$emit("game-deleted", this.gameId);
                     this.$router.push({ path: "/" });
                 })
                 .catch((error) => {

@@ -22,6 +22,7 @@
                             :gameId="game.game_id"
                             @delete-game="deleteGame"
                             @edit-game="editGame"
+                            @game-deleted="handleGameDeleted"
                         />
                     </router-link>
                 </li>
@@ -83,6 +84,7 @@ export default {
                     );
                 });
         },
+        /*
         deleteGame(gameId) {
             axios
                 .delete(`http://localhost:3000/games/delete/${gameId}`)
@@ -96,12 +98,16 @@ export default {
                         error
                     );
                 });
-                this.$emit("delete-game", gameId);
+            this.$emit("delete-game", gameId);
         },
+        */
         editGame(gameId) {
             console.log(gameId);
             this.$router.push({ name: "EditGame", params: { id: gameId } });
             this.$emit("edit-game", gameId);
+        },
+        handleGameDeleted(gameID) {
+            this.game = this.game.filter((game) => game.gameId !== gameID);
         },
     },
 };
