@@ -96,10 +96,11 @@ p {
 
 button {
     cursor: pointer;
-    background-color: black;
-    color: white;
-    outline: none;
+    font-family: "Poppins", sans-serif;
+    background-color: white;
     padding: 5px 10px;
-    border: none;
+    color: black;
+    outline: none;
+    border: 2px solid black;
 }
 </style>

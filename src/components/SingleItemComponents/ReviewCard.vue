@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <h2 class="author"> {{ author }}</h2>
+        <h2 class="author">{{ author }}</h2>
         <h3 class="grade">Grade: {{ grade }}/100</h3>
         <p class="review">{{ review }}</p>
         <div class="buttons" v-if="role === 'ADMIN'">
@@ -22,7 +22,6 @@ export default {
         reviewID: Number,
     },
     methods: {
-
         edit() {
             this.$router.push({
                 name: "EditReview",
@@ -96,10 +95,11 @@ export default {
 
 button {
     cursor: pointer;
-    background-color: black;
-    color: white;
-    outline: none;
+    font-family: "Poppins", sans-serif;
+    background-color: white;
     padding: 5px 10px;
-    border: none;
+    color: black;
+    outline: none;
+    border: 2px solid black;
 }
 </style>
